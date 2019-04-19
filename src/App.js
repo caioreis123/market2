@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Switch, Route } from 'react-router-dom';
+import Navbar from './Components/Navbar'
+
+// import Cart from './Components/ProductList'
+// import Default from './Components/Default'
+import Details from './Components/Details'
+import ProductList from './Components/ProductList'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <React.Fragment>
+                <CssBaseline />
+                <Navbar />
+                <Switch>
+                   
+                    <Route exact path="/" component={ProductList} />
+                    
+                    {/*the path is just a bar because is the homepage (localhost:3000), 
+          the second attribute points the component where the rout is going to. 
+          The path must be exact because all the other pages also stars with the single forward slash 
+                    so the home page keeps showing in front of the other pages when they are called.  */}
+
+                    <Route path='/details' component={Details} />
+
+                </Switch>
+            </React.Fragment>
+        );
+    }
 }
 
 export default App;
