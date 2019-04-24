@@ -1,6 +1,7 @@
 import React from 'react'
 import { Grid, withStyles } from '@material-ui/core'
 import testImage from '../product-1.png'
+import {MyConsumer} from './../Context'
 
 const styles = () => ({
     root: {
