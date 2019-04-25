@@ -7,7 +7,9 @@ export class MyProvider extends Component {
     state = {
         products: [],
         detailProduct,
-        cart:[],
+        cart:storeProducts,
+        cartSubTotal:0,
+        cartTotal: 0,
     }
 
     componentDidMount(){
@@ -57,12 +59,32 @@ export class MyProvider extends Component {
         } )
     }
 
+    increment = (id) => {
+        console.log(`incrementation with the ${id} id`)
+    }
+    
+    decrement = (id) => {
+        console.log(`decrementation with the ${id} id`)
+    }
+
+    removeItem = (id) => {
+    console.log(`remove the ${id} id`)
+    }
+
+    clearCart = () => {
+    console.log(`cart cleared`)
+    }
+
     render() {
         return (
             <MyContext.Provider value={ {
                 ...this.state,
                 handleDetail: this.handleDetail,
                 addToCart: this.addToCart,
+                increment: this.increment,
+                decrement: this.decrement,
+                removeItem: this.removeItem,
+                clearCart: this.clearCart
                 } }>
                 {this.props.children}
             </MyContext.Provider>

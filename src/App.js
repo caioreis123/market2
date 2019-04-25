@@ -3,6 +3,7 @@ import './App.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar'
+import Cart from './Components/Cart/Cart'
 
 // import Cart from './Components/ProductList'
 // import Default from './Components/Default'
@@ -25,6 +26,8 @@ class App extends Component {
                     so the home page keeps showing in front of the other pages when they are called.  */}
 
                     <Route path='/details' component={Details} />
+
+                    <Route path='/cart' component={Cart} />
 
                 </Switch>
             </React.Fragment>
