@@ -13,7 +13,7 @@ export default function Cart() {
                 return (
                     <React.Fragment>
                         <h1 style={{ textAlign: "center" }}>YOUR CART</h1>
-                        <CartColumns/>
+                        {/* <CartColumns/> */}
                         <CartList value = {value}/>
                     </React.Fragment>
                 )
