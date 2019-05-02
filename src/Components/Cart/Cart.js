@@ -1,5 +1,4 @@
 import React from 'react'
-import CartColumns from './CartColumns'
 import {MyConsumer} from '../../Context'
 import EmptyCart from './EmptyCart'
 import CartList from './CartList'
@@ -13,7 +12,6 @@ export default function Cart() {
                 return (
                     <React.Fragment>
                         <h1 style={{ textAlign: "center" }}>YOUR CART</h1>
-                        {/* <CartColumns/> */}
                         <CartList value = {value}/>
                     </React.Fragment>
                 )

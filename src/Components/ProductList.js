@@ -5,7 +5,6 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import { storeProducts } from '../data';
 import compose from 'recompose/compose';
 import withWidth from '@material-ui/core/withWidth';
 import {Link} from 'react-router-dom'
@@ -20,7 +19,7 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
     },
     icon: {
-        color: 'rgba(255, 255, 255, 0.54)',
+        color: 'white',
     },
 });
 
@@ -45,7 +44,7 @@ const ProductList = props =>  {
                         <GridList rows={2} cols={responsiveCols()} cellHeight={250}>
                             <GridListTile cols={4} key="Subheader" style={{ height: 'auto' }}>
                             </GridListTile>
-                            {storeProducts.map(tile => (
+                            {value.products.map(tile => (
                                 <GridListTile key={tile.id}>
                                     <Link to='/details'>
                                         <img 
@@ -59,8 +58,15 @@ const ProductList = props =>  {
                                         title={tile.title}
                                         subtitle={<span>$: {tile.price}</span>}
                                         actionIcon={
-                                            <IconButton onClick={() => { value.addToCart(tile.id) }} className={classes.icon}>
+                                            <IconButton 
+                                                onClick={() => { value.addToCart(tile.id) }} 
+                                                className={classes.icon}
+                                                disabled = {tile.inCart}>
+                                                {tile.inCart ? 
+                                                <i class="material-icons">shopping_cart</i>
+                                                :
                                                 <i class="material-icons">add_shopping_cart</i>
+                                                }
                                             </IconButton>
                                         }
                                     />

@@ -11,65 +11,96 @@ const styles = theme => ({
     card: {
         display: 'flex',
     },
-    details: {
-        display: 'flex',
-        flexDirection: 'column',
+    detailsProduct: {
+        // display: 'flex',
+        // flexDirection: 'column',
     },
-    content: {
-        flex: '1 0 auto',
+    detailsQuantity: {
+        // display: 'flex',
+        marginLeft: "auto",
+
     },
-    cover: {
-        width: 151,
+    column: {
+        // flex: '1 0 auto',
     },
-    controls: {
+    columnQuantity: {
+
+    },
+    img: {
+        width: "auto",
+        height: 200,
+        paddingLeft: "10rem",
+    },
+    quantity: {
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: theme.spacing.unit,
+        paddingRight: theme.spacing.unit,
         paddingBottom: theme.spacing.unit,
     },
-    // playIcon: {
-    //     height: 38,
-    //     width: 38,
-    // },
 });
 
 function CardItem(props) {
     const { classes, theme } = props;
-    const { id, title, img, price, total, count } = props.individualProduct
+    const { id, title, img, price, total, count, company } = props.individualProduct
     const {increment, decrement, removeItem} = props.value
 
     return (
         <Card className={classes.card}>
             <CardMedia
-                className={classes.cover}
+                className={classes.img}
                 image={img}
                 title="Product"
             />
-            <div className={classes.details}>
-                <CardContent className={classes.content}>
+            <div className={classes.detailsProduct}>
+                <CardContent className={classes.column}>
                     <Typography component="h5" variant="h5">
                         {title}
                     </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
+
+                    <Typography style={{ textTransform: 'uppercase' }} variant="body2" color="textSecondary">
+                        By {company}
+                    </Typography>
+
+                    <Typography variant="subtitle1">
                         ${price}
                     </Typography>
                 </CardContent>
-                <div className={classes.controls}>
-                    <IconButton aria-label="Decrement">
-                        <i class="material-icons">
-                            remove_circle_outline
-                        </i>
-                    </IconButton>
-
-                    {count}
-                    
-                    <IconButton aria-label="Increment">
-                        <i class="material-icons">
-                            add_circle_outline
-                        </i>
-                    </IconButton>
-                </div>
             </div>
+
+            <div className={classes.detailsQuantity}>
+                <CardContent className={classes.columnQuantity}>
+                    <div className={classes.quantity}>
+                        <Typography variant="subtitle1">
+                            Quantity:
+                        </Typography>
+                        <IconButton aria-label="Decrement">
+                            <i class="material-icons">
+                                remove_circle_outline
+                            </i>
+                        </IconButton>
+
+                        {count}
+
+                        <IconButton aria-label="Increment">
+                            <i class="material-icons">
+                                add_circle_outline
+                            </i>
+                        </IconButton>
+                        <IconButton aria-label="Remove">
+                            <i class="material-icons">
+                                delete
+                            </i>
+                        </IconButton>
+
+
+                    </div>
+                        <Typography variant="subtitle1">
+                            Subtotal: {count * price}
+                        </Typography>
+
+                </CardContent>
+            </div>
+
         </Card>
     );
 }
