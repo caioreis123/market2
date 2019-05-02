@@ -73,7 +73,7 @@ function CardItem(props) {
                         <Typography variant="subtitle1">
                             Quantity:
                         </Typography>
-                        <IconButton aria-label="Decrement">
+                        <IconButton onClick={() => { decrement(id)}} aria-label="Decrement">
                             <i class="material-icons">
                                 remove_circle_outline
                             </i>
@@ -81,22 +81,24 @@ function CardItem(props) {
 
                         {count}
 
-                        <IconButton aria-label="Increment">
+                        <IconButton onClick={() => { increment(id) }} aria-label="Increment">
                             <i class="material-icons">
                                 add_circle_outline
                             </i>
                         </IconButton>
-                        <IconButton aria-label="Remove">
-                            <i class="material-icons">
-                                delete
-                            </i>
-                        </IconButton>
-
+                        
 
                     </div>
                         <Typography variant="subtitle1">
                             Subtotal: {count * price}
                         </Typography>
+
+                        Remove Item
+                        <IconButton onClick={() => { removeItem(id) }} aria-label="Remove">
+                            <i class="material-icons">
+                                delete
+                                </i>
+                        </IconButton>
 
                 </CardContent>
             </div>

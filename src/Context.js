@@ -8,7 +8,6 @@ export class MyProvider extends Component {
         products: [],
         detailProduct,
         cart:[],
-        cartSubTotal:0,
         cartTotal: 0,
     }
 
@@ -62,19 +61,54 @@ export class MyProvider extends Component {
     }
 
     increment = (id) => {
-        console.log(`incrementation with the ${id} id`)
+        let tempProducts = [...this.state.products]
+        const index = tempProducts.indexOf(this.getItem(id))
+        const product = tempProducts[index]
+        product.count = product.count + 1
+        this.setState(() => {
+            return {
+                products: tempProducts,
+            }
+        })
     }
     
     decrement = (id) => {
-        console.log(`decrementation with the ${id} id`)
+        let tempProducts = [...this.state.products]
+        const index = tempProducts.indexOf(this.getItem(id))
+        const product = tempProducts[index]
+        product.count === 0 ? product.count = 0 : product.count = product.count - 1
+        this.setState(() => {
+            return {
+                products: tempProducts,
+            }
+        })
     }
 
     removeItem = (id) => {
+        let tempProducts = [...this.state.products]
+        const index = tempProducts.indexOf(this.getItem(id))
+        const product = tempProducts[index]
+        product.inCart = !product.inCart
+        const indexOfCartItem = this.state.cart.indexOf(product)
+        this.state.cart.splice(indexOfCartItem, 1)
+        this.setState(() => {
+            return {
+                products: tempProducts,
+                cart: this.state.cart
+            }
+        })
     console.log(`remove the ${id} id`)
     }
 
     clearCart = () => {
-    console.log(`cart cleared`)
+        this.deepCopyProducts()
+        // the deep copy here is to reset all the cart buttons in the store, since we have to change the inCart property of all the products object
+
+        this.setState(() => {
+            return {
+                cart: []
+            }
+        })
     }
 
     render() {

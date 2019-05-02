@@ -2,6 +2,7 @@ import React from 'react'
 import {MyConsumer} from '../../Context'
 import EmptyCart from './EmptyCart'
 import CartList from './CartList'
+import CartTotal from './CartTotal'
 
 export default function Cart() {
   return (
@@ -13,6 +14,7 @@ export default function Cart() {
                     <React.Fragment>
                         <h1 style={{ textAlign: "center" }}>YOUR CART</h1>
                         <CartList value = {value}/>
+                        <CartTotal value = {value} />
                     </React.Fragment>
                 )
             } else {
