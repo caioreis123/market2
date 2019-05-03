@@ -73,7 +73,10 @@ function CardItem(props) {
                         <Typography variant="subtitle1">
                             Quantity:
                         </Typography>
-                        <IconButton onClick={() => { decrement(id)}} aria-label="Decrement">
+                        <IconButton 
+                        onClick={() => { decrement(id)}} 
+                        aria-label="Decrement"
+                        disabled={count === 1 ? true : false}>
                             <i class="material-icons">
                                 remove_circle_outline
                             </i>

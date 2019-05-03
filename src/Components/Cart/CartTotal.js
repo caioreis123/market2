@@ -17,7 +17,7 @@ function CartTotal(props) {
   return (
     <React.Fragment>
         <Typography>
-            Total: {props.value.total}
+            Total: {props.value.cartTotalValue}
         </Typography>
         <Button onClick={()=> {props.value.clearCart()}} variant="contained" color="secondary" className={classes.button}>
               Clear Cart
