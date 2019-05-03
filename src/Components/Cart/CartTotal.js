@@ -5,24 +5,23 @@ import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
     button: {
-        margin: theme.spacing.unit,
-    },
-    input: {
-        display: 'none',
-    },
+        // margin: theme.spacing.unit,
+        display: "flex",
+        margin: "auto",
+    }
 });
 
 function CartTotal(props) {
     const {classes} = props
   return (
-    <React.Fragment>
-        <Typography>
-            Total: {props.value.cartTotalValue}
+      <div>
+        <Typography align="center" variant="h5" >
+            Total: ${props.value.cartTotalValue}
         </Typography>
-        <Button onClick={()=> {props.value.clearCart()}} variant="contained" color="secondary" className={classes.button}>
+          <Button onClick={()=> {props.value.clearCart()}} variant="contained" color="secondary" className={classes.button}>
               Clear Cart
         </Button>
-    </React.Fragment>
+    </div>
   )
 }
 

@@ -66,6 +66,7 @@ export class MyProvider extends Component {
         const index = tempProducts.indexOf(this.getItem(id))
         const product = tempProducts[index]
         product.count = product.count + 1
+        product.total = product.count * product.price
         this.setState(() => {
             return {
                 products: tempProducts,
@@ -77,7 +78,8 @@ export class MyProvider extends Component {
         let tempProducts = [...this.state.products]
         const index = tempProducts.indexOf(this.getItem(id))
         const product = tempProducts[index]
-        product.count === 0 ? product.count = 0 : product.count = product.count - 1
+        product.count = product.count - 1
+        product.total = product.count * product.price
         this.setState(() => {
             return {
                 products: tempProducts,
