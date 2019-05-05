@@ -45,7 +45,7 @@ function Navbar(props) {
                                 className={classes.cart} 
                                 color="inherit" 
                                 aria-label="Cart">
-                                    <Badge badgeContent={value.cart.length} color="primary" classes={{ badge: classes.badge }}>  
+                                    <Badge badgeContent={value.totalInCart} color="primary" classes={{ badge: classes.badge }}>  
                                         <i className="material-icons">local_grocery_store</i>
                                     </Badge>
                                     <Typography className={classes.cartValue} variant="h6" color="inherit">${value.cartTotalValue}</Typography>

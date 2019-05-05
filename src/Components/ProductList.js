@@ -60,13 +60,8 @@ const ProductList = props =>  {
                                         actionIcon={
                                             <IconButton 
                                                 onClick={() => { value.addToCart(tile.id) }} 
-                                                className={classes.icon}
-                                                disabled = {tile.inCart}>
-                                                {tile.inCart ? 
-                                                <i class="material-icons">shopping_cart</i>
-                                                :
+                                                className={classes.icon}>
                                                 <i class="material-icons">add_shopping_cart</i>
-                                                }
                                             </IconButton>
                                         }
                                     />

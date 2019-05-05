@@ -53,8 +53,8 @@ const Details = props => {
                                 <Icon>keyboard_backspace</Icon>
                                 Back to Store
                             </Button>
-                            <Button onClick={() => { value.addToCart(id) }} disabled={inCart} variant="contained" color="primary" className={classes.btn}>
-                                {inCart ? "In Cart" : "Add to Cart"}
+                            <Button onClick={() => { value.addToCart(id) }} variant="contained" color="primary" className={classes.btn}>
+                                {"Add to Cart"}
                                 <Icon>add_shopping_cart</Icon>
                             </Button>
                         </Grid>

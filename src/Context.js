@@ -9,6 +9,7 @@ export class MyProvider extends Component {
         detailProduct,
         cart:[],
         cartTotalValue: 0,
+        totalInCart: 0,
     }
 
     componentDidMount(){
@@ -27,6 +28,7 @@ export class MyProvider extends Component {
                products: copiedProducts,
                 cartTotalValue: 0,
                 cart: [],
+                totalInCart: 0,
             }
         } )
     }
@@ -57,6 +59,8 @@ export class MyProvider extends Component {
         const product = tempProducts[index]
         product.inCart = !product.inCart
         product.count = product.count + 1
+        let tempCart = [...this.state.cart, product]
+        tempCart = [...new Set(tempCart)]
 
         product.total = product.price
         //change the total property of the products object in the cart so the calculateTotal function can work with this values
@@ -64,7 +68,7 @@ export class MyProvider extends Component {
         this.setState ( ()=>{
             return {
                 products: tempProducts,
-                cart: [...this.state.cart, product],
+                cart: tempCart,
                 //while products is a deep copy of all the data with the new changes made by the add cart
                 //the cart state is just the data of the products added to the cart also with the changes
             }
@@ -124,10 +128,15 @@ export class MyProvider extends Component {
 
     calculateTotal = () => {
         let totalToPay = 0
-        this.state.cart.map(item => (totalToPay = totalToPay + item.total))
+        let totalInCart = 0
+        this.state.cart.map(item => (
+            totalToPay = totalToPay + (item.total * item.count),
+            totalInCart = totalInCart + item.count
+        ))
         this.setState(() => {
             return {
-                cartTotalValue: totalToPay
+                cartTotalValue: totalToPay,
+                totalInCart
             }
         })
     }
