@@ -13,6 +13,9 @@ const styles = theme => ({
     cart: {
         marginLeft: 'auto',
     },
+    cartValue:{
+        marginLeft: '.9rem',
+    },
     badge: {
         top: '50%',
         right: -3,
@@ -45,6 +48,7 @@ function Navbar(props) {
                                     <Badge badgeContent={value.cart.length} color="primary" classes={{ badge: classes.badge }}>  
                                         <i className="material-icons">local_grocery_store</i>
                                     </Badge>
+                                    <Typography className={classes.cartValue} variant="h6" color="inherit">${value.cartTotalValue}</Typography>
                                 </IconButton>
 
                             </Toolbar>

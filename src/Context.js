@@ -13,7 +13,7 @@ export class MyProvider extends Component {
 
     componentDidMount(){
         this.deepCopyProducts()
-        //the deep copy should be run as soon as possible so we can get the original data
+        //the deep copy should run as soon as possible so we can get the original data
     }
 
     deepCopyProducts = () => {
@@ -23,10 +23,14 @@ export class MyProvider extends Component {
             copiedProducts = [...copiedProducts, copiedIndividual]
         } )
         this.setState( () => {
-           return {products: copiedProducts}
+           return {
+               products: copiedProducts,
+                cartTotalValue: 0,
+
+            }
         } )
     }
-    //the deep copy is important to the moment when the user hits the clear cart button on the cart and then we need some way to reset the total properties of the products objectes to 0, this means the default value (original data). If we don't use the deep copy we will always be getting the modify values of total, messing up the total value of the cart
+    //the deep copy is important when the user hits the clear cart button on the cart and then we need some way to reset the total properties of the products objectes to 0, this means the default value (original data). If we don't use the deep copy we will always be getting the modify values of total, messing up the total value of the cart
 
     getItem = id => {
         const product = this.state.products.find( item => item.id===id )
@@ -56,9 +60,12 @@ export class MyProvider extends Component {
             return {
                 products: tempProducts,
                 cart: [...this.state.cart, product],
+                //while products is a deep copy of all the data with the new changes made by the add cart
+                //the cart state is just the data of the products added to the cart also with the changes
             }
         },() => {this.calculateTotal()} )
-        
+        console.log(`this is products ${this.state.products}`)
+        console.log(`this is cart ${this.state.cart}`)
     }
 
     increment = (id) => {
