@@ -57,10 +57,11 @@ export class MyProvider extends Component {
         let tempProducts = [...this.state.products]
         const index = tempProducts.indexOf(this.getItem(id))
         const product = tempProducts[index]
-        product.inCart = !product.inCart
         product.count = product.count + 1
         let tempCart = [...this.state.cart, product]
+
         tempCart = [...new Set(tempCart)]
+        //will add the item just once in the cart, even if clicked more than one time
 
         product.total = product.price
         //change the total property of the products object in the cart so the calculateTotal function can work with this values
@@ -73,8 +74,6 @@ export class MyProvider extends Component {
                 //the cart state is just the data of the products added to the cart also with the changes
             }
         },() => {this.calculateTotal()} )
-        console.log(`this is products ${this.state.products}`)
-        console.log(`this is cart ${this.state.cart}`)
     }
 
     increment = (id) => {
@@ -111,7 +110,9 @@ export class MyProvider extends Component {
         product.inCart = !product.inCart
         product.total = 0
         product.count = 0
-        //will reset this 3 values of the removed product so when the user added it again does not mess up our total value of the cart and our counter of the amout of product and enable back the add to cart button
+        //will reset this 3 values of the removed product
+        //so when the user adds it again it does not mess up our total value of the cart and
+        // our counter of the amout of product while enabling back the add to cart button
 
         let tempCart = [...this.state.cart]
         const indexOfCartItem = tempCart.indexOf(product)
