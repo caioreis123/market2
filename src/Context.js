@@ -26,11 +26,16 @@ export class MyProvider extends Component {
            return {
                products: copiedProducts,
                 cartTotalValue: 0,
-
+                cart: [],
             }
         } )
     }
-    //the deep copy is important when the user hits the clear cart button on the cart and then we need some way to reset the total properties of the products objectes to 0, this means the default value (original data). If we don't use the deep copy we will always be getting the modify values of total, messing up the total value of the cart
+    //the deep copy is important when the user hits the clear cart button on the cart 
+    //and then we need some way to reset the total properties of the products objects to 0,
+    // this means the default value (original data). 
+    //If we don't use the deep copy we will always be getting the modify values of total,
+    // messing up the total value of the cart.
+    //The deepCopyProducts also does the reset in the cart and cartTotalValue states
 
     getItem = id => {
         const product = this.state.products.find( item => item.id===id )
@@ -117,17 +122,6 @@ export class MyProvider extends Component {
         }, () => { this.calculateTotal() })
     }
 
-    clearCart = () => {
-        this.deepCopyProducts()
-        // this deep copy is to reset all the cart buttons in the store, since we have to change the inCart property of all the products object
-
-        this.setState(() => {
-            return {
-                cart: []
-            }
-        })
-    }
-
     calculateTotal = () => {
         let totalToPay = 0
         this.state.cart.map(item => (totalToPay = totalToPay + item.total))
@@ -147,7 +141,7 @@ export class MyProvider extends Component {
                 increment: this.increment,
                 decrement: this.decrement,
                 removeItem: this.removeItem,
-                clearCart: this.clearCart
+                deepCopyProducts: this.deepCopyProducts,
                 } }>
                 {this.props.children}
             </MyContext.Provider>

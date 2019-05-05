@@ -18,7 +18,7 @@ function CartTotal(props) {
         <Typography align="center" variant="h5" >
             Total: ${props.value.cartTotalValue}
         </Typography>
-          <Button onClick={()=> {props.value.clearCart()}} variant="contained" color="secondary" className={classes.button}>
+          <Button onClick={() => { props.value.deepCopyProducts()}} variant="contained" color="secondary" className={classes.button}>
               Clear Cart
         </Button>
     </div>
