@@ -1,10 +1,17 @@
 # The following types define the data model of the example service
 # based on which the GraphQL API is generated
 
-type User @model {
+type Product @model {
   id: ID! @isUnique
-  name: String
-  dateOfBirth: DateTime
+  title: String
+  img: String
+  price: Float
+  company: String
+  info: String
+  inCart: Boolean
+  count: Int
+  total: Float
+  stock: Int
 
   # Uncomment below - you can declare relations between models like this
 
