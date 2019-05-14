@@ -1,0 +1,10 @@
+endpoint: https://us1.prisma.sh/caio-reis-372c29/backend2/dev
+datamodel: datamodel.prisma
+
+generate:
+  - generator: javascript-client
+    output: ./generated/prisma-client/
+
+hooks:
+  post-deploy:
+    - prisma generate
