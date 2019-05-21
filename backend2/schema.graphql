@@ -1,13 +1,31 @@
+# ROOT TYPES:
 type Query {
   publishedPosts: [Post!]!
   post(postId: ID!): Post
   postsByUser(userId: ID!): [Post!]!
+  ###
+  
 }
 
 type Mutation {
   createUser(name: String!): User
   createDraft(title: String!, userId: ID!): Post
   publish(postId: ID!): Post
+}
+
+################################################################
+# OBJECT TYPES:
+type Product {
+    id: ID!
+    title: String!
+    img: String!
+    company: String!
+    info: String!
+    price: Float!
+    total: Float!
+    count: Int!
+    stock: Int!
+    inCart: Boolean!
 }
 
 type User {

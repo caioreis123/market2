@@ -1,66 +1,27 @@
 const { prisma } = require('./generated/prisma-client')
-const { GraphQLServer } = require('graphql-yoga')
 
-const resolvers = {
-    Query: {
-        publishedPosts(root, args, context) {
-            return context.prisma.posts({ where: { published: true } })
-        },
-        post(root, args, context) {
-            return context.prisma.post({ id: args.postId })
-        },
-        postsByUser(root, args, context) {
-            return context.prisma
-                .user({
-                    id: args.userId,
-                })
-                .posts()
-        },
-    },
-    Mutation: {
-        createDraft(root, args, context) {
-            return context.prisma.createPost({
-                title: args.title,
-                author: {
-                    connect: { id: args.userId },
-                },
-            })
-        },
-        publish(root, args, context) {
-            return context.prisma.updatePost({
-                where: { id: args.postId },
-                data: { published: true },
-            })
-        },
-        createUser(root, args, context) {
-            return context.prisma.createUser({ name: args.name })
-        },
-    },
-    User: {
-        posts(root, args, context) {
-            return context.prisma
-                .user({
-                    id: root.id,
-                })
-                .posts()
-        },
-    },
-    Post: {
-        author(root, args, context) {
-            return context.prisma
-                .post({
-                    id: root.id,
-                })
-                .author()
-        },
-    },
+// A `main` function so that we can use async/await
+async function main() {
+    // Create a new user called `Alice`
+    const newUser = await prisma.createUser({ name: 'Caio' })
+    console.log(`Created new user: ${newUser.name} (ID: ${newUser.id})`)
+
+    // //delete the user with this id
+    await prisma.deleteUser({ id: "cjvnxld6o71680b35z5t93i77"})
+
+    //add an email to the caio user
+    await prisma.updateUser({
+        where: { id: 'cjvy3u3hq50co0b428pj387k7' },
+        data: { email: 'caioviski@devcaio.com' },
+    })
+
+    // Read all users from the database and print them to the console
+    const allUsers = await prisma.users()
+    console.log(allUsers)
+
+    //query all poster by a user
+    const postsByUser = await prisma.user({ email: 'bob@prisma.io' }).posts()
+    console.log(`All posts by that user: ${JSON.stringify(postsByUser)}`)
 }
 
-const server = new GraphQLServer({
-    typeDefs: './schema.graphql',
-    resolvers,
-    context: {
-        prisma,
-    },
-})
-server.start(() => console.log('Server is running on http://localhost:4000'))
+main().catch(e => console.error(e))
