@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import { storeProducts, detailProduct} from './data'
+import React, { Component } from 'react'
+import { storeProducts, detailProduct } from './data'
 
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
@@ -7,30 +7,30 @@ export class MyProvider extends Component {
     state = {
         products: [],
         detailProduct,
-        cart:[],
+        cart: [],
         cartTotalValue: 0,
         totalInCart: 0,
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.deepCopyProducts()
         //the deep copy should run as soon as possible so we can get the original data
     }
 
     deepCopyProducts = () => {
         let copiedProducts = []
-        storeProducts.forEach( individualProductObject => {
-            let copiedIndividual = {...individualProductObject}
+        storeProducts.forEach(individualProductObject => {
+            let copiedIndividual = { ...individualProductObject }
             copiedProducts = [...copiedProducts, copiedIndividual]
-        } )
-        this.setState( () => {
-           return {
-               products: copiedProducts,
+        })
+        this.setState(() => {
+            return {
+                products: copiedProducts,
                 cartTotalValue: 0,
                 cart: [],
                 totalInCart: 0,
             }
-        } )
+        })
     }
     //the deep copy is important when the user hits the clear cart button on the cart 
     //and then we need some way to reset the total properties of the products objects to 0,
@@ -40,17 +40,17 @@ export class MyProvider extends Component {
     //The deepCopyProducts also does the reset in the cart and cartTotalValue states
 
     getItem = id => {
-        const product = this.state.products.find( item => item.id===id )
+        const product = this.state.products.find(item => item.id === id)
         return product
     }
 
     handleDetail = (id) => {
         const product = this.getItem(id)
-        this.setState( ()=>{
+        this.setState(() => {
             return {
                 detailProduct: product
             }
-        } )
+        })
     }
 
     addToCart = (id) => {
@@ -63,17 +63,17 @@ export class MyProvider extends Component {
         tempCart = [...new Set(tempCart)]
         //will add the item just once in the cart, even if clicked more than one time
 
-        product.total = product.price
+        product.total = product.count * product.price
         //change the total property of the products object in the cart so the calculateTotal function can work with this values
 
-        this.setState ( ()=>{
+        this.setState(() => {
             return {
                 products: tempProducts,
                 cart: tempCart,
                 //while products is a deep copy of all the data with the new changes made by the add cart
                 //the cart state is just the data of the products added to the cart also with the changes
             }
-        },() => {this.calculateTotal()} )
+        }, () => { this.calculateTotal() })
     }
 
     increment = (id) => {
@@ -88,7 +88,7 @@ export class MyProvider extends Component {
             }
         }, () => { this.calculateTotal() })
     }
-    
+
     decrement = (id) => {
         let tempProducts = [...this.state.products]
         const index = tempProducts.indexOf(this.getItem(id))
@@ -131,7 +131,7 @@ export class MyProvider extends Component {
         let totalToPay = 0
         let totalInCart = 0
         this.state.cart.map(item => (
-            totalToPay = totalToPay + (item.total * item.count),
+            totalToPay = totalToPay + item.total,
             totalInCart = totalInCart + item.count
         ))
         this.setState(() => {
@@ -144,7 +144,7 @@ export class MyProvider extends Component {
 
     render() {
         return (
-            <MyContext.Provider value={ {
+            <MyContext.Provider value={{
                 ...this.state,
                 handleDetail: this.handleDetail,
                 addToCart: this.addToCart,
@@ -152,7 +152,7 @@ export class MyProvider extends Component {
                 decrement: this.decrement,
                 removeItem: this.removeItem,
                 deepCopyProducts: this.deepCopyProducts,
-                } }>
+            }}>
                 {this.props.children}
             </MyContext.Provider>
         )
