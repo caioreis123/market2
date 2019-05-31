@@ -1,13 +1,12 @@
-type User {
-  id: ID! @id
-  email: String @unique
-  name: String!
-  posts: [Post!]!
-}
-
-type Post {
-  id: ID! @id
-  title: String!
-  published: Boolean! @default(value: false)
-  author: User @relation(link: INLINE)
+type Product {
+    id: ID! @id
+    title: String!
+    img: String!
+    company: String!
+    info: String!
+    price: Float!   """ single price of this item """
+    total: Float!   """ subtotal of this item (price * count) """
+    count: Int!     """ quantity of this item in cart """
+    stock: Int!     """ quantity of this item in stock """
+    inCart: Boolean!
 }

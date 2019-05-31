@@ -1,27 +1,25 @@
 # ROOT TYPES:
 type Query {
-  publishedPosts: [Post!]!
-  post(postId: ID!): Post
-  postsByUser(userId: ID!): [Post!]!
+  all: [Product!]!
 }
 
-type Mutation {
-  createUser(name: String!): User
-  createDraft(title: String!, userId: ID!): Post
-  publish(postId: ID!): Post
-}
+""" type Mutation {
+  increment(id:ID!):Product!
+  decrement(id:ID!):Product!
+  reset(id:ID!):Product!
+} """
 
 ################################################################
 # OBJECT TYPES:
 type Product {
-    id: ID!
+    id: Int!
     title: String!
     img: String!
     company: String!
     info: String!
-    price: Float!   """ price of single item """
-    total: Float!   """ price of """
-    count: Int!     """ quantity of the same product in cart """
-    stock: Int!     """ quantity of the same product in stock """
+    price: Float!   """ single price of this item """
+    total: Float!   """ subtotal of this item (price * count) """
+    count: Int!     """ quantity of this item in cart """
+    stock: Int!     """ quantity of this item in stock """
     inCart: Boolean!
 }
