@@ -7,7 +7,7 @@ const { GraphQLServer } = require('graphql-yoga')
 const { prisma } = require('./generated/prisma-client')
 
 //import the data
-const { storeProducts } = require('../src/data')
+const { storeProducts: data } = require('../src/data')
 
 // Resolver functions implement the GraphQL schema.
 // Tells the server HOW to resolve api operations.
@@ -31,9 +31,16 @@ const resolvers = {
     //********resolvers for the root types:
     Query: {
         all: () => {
-            return storeProducts
+            return data
+        },
+        item: (root, args) => {
+            const index = args.id - 1
+            return data[index]
         },
     },
+    Mutation: {
+
+    }
 
     /* Mutation: {
         //THE PRISMA OBJECT IS INSIDE THE CONTEXT OBJECT. THE PRISMA OBJECT IS ACTUALLY THE PRISMA CLIENT THAT IS
@@ -87,7 +94,7 @@ const server = new GraphQLServer({
         return {
             ...request,
             prisma,
-            storeProducts
+            data
         }
     },
 })

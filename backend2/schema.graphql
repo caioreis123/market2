@@ -1,13 +1,17 @@
 # ROOT TYPES:
 type Query {
   all: [Product!]!
+  item (id:Int!): Product!
 }
 
-""" type Mutation {
+type Mutation {
+}
+""" 
+  reset:[Product!]!
   increment(id:ID!):Product!
   decrement(id:ID!):Product!
-  reset(id:ID!):Product!
-} """
+
+ """
 
 ################################################################
 # OBJECT TYPES:
