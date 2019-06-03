@@ -39,7 +39,28 @@ const resolvers = {
         },
     },
     Mutation: {
+        add: (root, args) => {
+            const index = args.id - 1
 
+            if (data[index].stock > 0) {
+                data[index].count += 1
+                data[index].stock -= 1
+            }
+            /* the count variable tracks the items in cart
+            while the stock is for the items in the stock */
+
+            return data[index]
+        },
+        remove: (root, args) => {
+            const index = args.id - 1
+
+            if (data[index].count > 0) {
+                data[index].count -= 1
+                data[index].stock += 1
+            }
+
+            return data[index]
+        }
     }
 
     /* Mutation: {

@@ -5,11 +5,11 @@ type Query {
 }
 
 type Mutation {
+  add(id:ID!):Product!
+  remove(id:ID!):Product!
 }
 """ 
   reset:[Product!]!
-  increment(id:ID!):Product!
-  decrement(id:ID!):Product!
 
  """
 

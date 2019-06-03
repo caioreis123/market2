@@ -10,7 +10,7 @@ const storeProducts = [
         inCart: false,
         count: 0,
         total: 0,
-        stock: 21
+        stock: 7
     },
     {
         id: 2,
@@ -23,7 +23,7 @@ const storeProducts = [
         inCart: false,
         count: 0,
         total: 0,
-        stock: 21
+        stock: 7
     },
     {
         id: 3,
@@ -36,7 +36,7 @@ const storeProducts = [
         inCart: false,
         count: 0,
         total: 0,
-        stock: 21
+        stock: 7
     },
     {
         id: 4,
@@ -49,7 +49,7 @@ const storeProducts = [
         inCart: false,
         count: 0,
         total: 0,
-        stock: 21
+        stock: 7
     },
     {
         id: 5,
@@ -62,7 +62,7 @@ const storeProducts = [
         inCart: false,
         count: 0,
         total: 0,
-        stock: 21
+        stock: 7
     },
     {
         id: 6,
@@ -75,7 +75,7 @@ const storeProducts = [
         inCart: false,
         count: 0,
         total: 0,
-        stock: 21
+        stock: 7
     },
     {
         id: 7,
@@ -88,7 +88,7 @@ const storeProducts = [
         inCart: false,
         count: 0,
         total: 0,
-        stock: 21
+        stock: 7
     },
     {
         id: 8,
@@ -101,7 +101,7 @@ const storeProducts = [
         inCart: false,
         count: 0,
         total: 0,
-        stock: 21
+        stock: 7
     }
 ];
 
