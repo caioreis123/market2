@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { storeProducts, detailProduct } from './data'
+import { storeProducts } from './data'
 
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
 export class MyProvider extends Component {
     state = {
         products: [],
-        detailProduct,
+        detailProduct: [],
         cart: [],
         cartTotalValue: 0,
         totalInCart: 0,
