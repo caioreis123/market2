@@ -1,19 +1,24 @@
 import React from 'react'
 import CartItem from './CartItem'
+import { createFragmentContainer, graphql } from 'react-relay'
 
-export default function CartList({value}) {
-    const {cart} = value
+function CartList({ value }) {
+    const { cart } = value
 
-  return (
-    <div>
-     {cart.map( (individualProduct) =>{
-        return <CartItem
-        key={individualProduct.id}
-        individualProduct={individualProduct}
-        value={value}
-        />
+    return (
+        <div>
+            {cart.map((individualProduct) => {
+                return <CartItem
+                    key={individualProduct.id}
+                    individualProduct={individualProduct}
+                    value={value}
+                />
 
-     } )}
-    </div>
-  )
+            })}
+        </div>
+    )
 }
+
+export default createFragmentContainer(CartList, graphql`
+    fragment 
+`)

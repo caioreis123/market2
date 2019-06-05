@@ -1,11 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+/* This component apears inside the cart. Each product added is a card with some buttons
+a picture, a subtotal display. */
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
+import compose from 'recompose/compose'
+import { createFragmentContainer, graphql } from 'react-relay'
+//import graphql from 'babel-plugin-relay/macro';
 
 const styles = theme => ({
     card: {
@@ -39,10 +44,10 @@ const styles = theme => ({
     },
 });
 
-function CardItem(props) {
+function CartItem(props) {
     const { classes, theme } = props;
     const { id, title, img, price, total, count, company } = props.individualProduct
-    const {increment, decrement, removeItem} = props.value
+    const { increment, decrement, removeItem } = props.value
 
     return (
         <Card className={classes.card}>
@@ -73,10 +78,10 @@ function CardItem(props) {
                         <Typography variant="subtitle1">
                             Quantity:
                         </Typography>
-                        <IconButton 
-                        onClick={() => { decrement(id)}} 
-                        aria-label="Decrement"
-                        disabled={count === 1 ? true : false}>
+                        <IconButton
+                            onClick={() => { decrement(id) }}
+                            aria-label="Decrement"
+                            disabled={count === 1 ? true : false}>
                             <i class="material-icons">
                                 remove_circle_outline
                             </i>
@@ -89,19 +94,19 @@ function CardItem(props) {
                                 add_circle_outline
                             </i>
                         </IconButton>
-                        
+
 
                     </div>
-                        <Typography variant="subtitle1">
-                            Subtotal: ${count * price}
-                        </Typography>
+                    <Typography variant="subtitle1">
+                        Subtotal: ${count * price}
+                    </Typography>
 
-                        Remove Item
+                    Remove Item
                         <IconButton onClick={() => { removeItem(id) }} aria-label="Remove">
-                            <i class="material-icons">
-                                delete
+                        <i class="material-icons">
+                            delete
                                 </i>
-                        </IconButton>
+                    </IconButton>
 
                 </CardContent>
             </div>
@@ -110,9 +115,28 @@ function CardItem(props) {
     );
 }
 
-CardItem.propTypes = {
+CartItem.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(CardItem);
+//export default withStyles(styles, { withTheme: true })(CardItem);
+
+export default compose(
+    createFragmentContainer(CartItem, graphql`
+        CartItem_individualProduct on CartItem{
+            id
+            title
+            img
+            price
+            total
+            count
+            company
+        }
+    `),
+
+    withStyles(styles, {
+        withTheme: true,
+        name: 'CartItem',
+    }),
+)(CartItem);

@@ -33,6 +33,7 @@
         "not op_mini all"
     ],
     "devDependencies": {
+        "babel-plugin-macros": "^2.6.0",
         "relay-compiler": "^4.0.0"
     }
 }
