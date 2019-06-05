@@ -1,3 +1,5 @@
+/* this component is just to map through the cart state and create the CartItem component that is the one with the cards */
+
 import React from 'react'
 import CartItem from './CartItem'
 import { createFragmentContainer, graphql } from 'react-relay'

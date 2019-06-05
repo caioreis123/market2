@@ -1,3 +1,4 @@
+/* this page is shown when the user clicks the img of a product */
 import React from 'react'
 import { Grid, withStyles, Button, Icon } from '@material-ui/core'
 import { MyConsumer } from './../Context'

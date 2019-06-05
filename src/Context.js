@@ -1,12 +1,15 @@
+/* in this page we define all the functions a the only state of the whole app. 
+Both the state and the functions are going be passed using the context API imported in the index.js file */
+
 import React, { Component } from 'react'
-import { storeProducts, detailProduct } from './data'
+import { storeProducts } from './data'
 
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
 export class MyProvider extends Component {
     state = {
         products: [],
-        detailProduct,
+        detailProduct: [],
         cart: [],
         cartTotalValue: 0,
         totalInCart: 0,
@@ -43,6 +46,7 @@ export class MyProvider extends Component {
         const product = this.state.products.find(item => item.id === id)
         return product
     }
+    /* this function returns the product with the id passed to it as argument */
 
     handleDetail = (id) => {
         const product = this.getItem(id)
@@ -52,6 +56,8 @@ export class MyProvider extends Component {
             }
         })
     }
+    /* this function only runs when the img of the product is clicked in the store page 
+    and then set the detailProduct state to the product clicked */
 
     addToCart = (id) => {
         let tempProducts = [...this.state.products]
