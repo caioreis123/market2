@@ -1,3 +1,5 @@
+/* this page renders the cart with its added products in form of cards */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';

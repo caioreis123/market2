@@ -1,7 +1,8 @@
+/* this page is shown when the user clicks the img of a product */
 import React from 'react'
 import { Grid, withStyles, Button, Icon } from '@material-ui/core'
-import {MyConsumer} from './../Context'
-import {Link} from 'react-router-dom'
+import { MyConsumer } from './../Context'
+import { Link } from 'react-router-dom'
 
 const styles = (theme) => ({
     root: {
@@ -27,8 +28,8 @@ const Details = props => {
     const { classes } = props;
     return (
         <MyConsumer>
-            { value => {
-                const {id,company,img,info,price,title,inCart} = value.detailProduct
+            {value => {
+                const { id, company, img, info, price, title, inCart } = value.detailProduct
                 return (
                     <Grid
                         container
@@ -60,7 +61,7 @@ const Details = props => {
                         </Grid>
                     </Grid>
                 )
-            } }
+            }}
         </MyConsumer>
     )
 }

@@ -1,3 +1,5 @@
+/* this is the main page: Store. Where all the products are displayed */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -7,8 +9,8 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import compose from 'recompose/compose';
 import withWidth from '@material-ui/core/withWidth';
-import {Link} from 'react-router-dom'
-import {MyConsumer} from './../Context'
+import { Link } from 'react-router-dom'
+import { MyConsumer } from './../Context'
 
 const styles = theme => ({
     root: {
@@ -23,7 +25,7 @@ const styles = theme => ({
     },
 });
 
-const ProductList = props =>  {
+const ProductList = props => {
     const { classes } = props;
 
     const responsiveCols = () => {
@@ -47,19 +49,19 @@ const ProductList = props =>  {
                             {value.products.map(tile => (
                                 <GridListTile key={tile.id}>
                                     <Link to='/details'>
-                                        <img 
-                                            src={tile.img} 
-                                            alt={tile.title} 
-                                            width="250" 
-                                            height="250" 
-                                            onClick={()=>value.handleDetail(tile.id)} />
+                                        <img
+                                            src={tile.img}
+                                            alt={tile.title}
+                                            width="250"
+                                            height="250"
+                                            onClick={() => value.handleDetail(tile.id)} />
                                     </Link>
                                     <GridListTileBar
                                         title={tile.title}
                                         subtitle={<span>$: {tile.price}</span>}
                                         actionIcon={
-                                            <IconButton 
-                                                onClick={() => { value.addToCart(tile.id) }} 
+                                            <IconButton
+                                                onClick={() => { value.addToCart(tile.id) }}
                                                 className={classes.icon}>
                                                 <i class="material-icons">add_shopping_cart</i>
                                             </IconButton>
@@ -70,11 +72,11 @@ const ProductList = props =>  {
                         </GridList>
                     </div>
                 )
-                
+
             }}
         </MyConsumer>
     );
-    
+
 }
 
 ProductList.propTypes = {
@@ -83,7 +85,7 @@ ProductList.propTypes = {
 
 //export default withStyles(styles)(ProductList);
 
-export default compose (
+export default compose(
     withStyles(styles, {
         name: 'ProductList',
     }),

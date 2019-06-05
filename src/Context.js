@@ -1,3 +1,6 @@
+/* in this page we define all the functions a the only state of the whole app. 
+Both the state and the functions are going be passed using the context API imported in the index.js file */
+
 import React, { Component } from 'react'
 import { storeProducts } from './data'
 
@@ -53,6 +56,8 @@ export class MyProvider extends Component {
             }
         })
     }
+    /* this function only runs when the img of the product is clicked in the store page 
+    and then set the detailProduct state to the product clicked */
 
     addToCart = (id) => {
         let tempProducts = [...this.state.products]
