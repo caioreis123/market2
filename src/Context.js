@@ -43,6 +43,7 @@ export class MyProvider extends Component {
         const product = this.state.products.find(item => item.id === id)
         return product
     }
+    /* this function returns the product with the id passed to it as argument */
 
     handleDetail = (id) => {
         const product = this.getItem(id)
