@@ -4,7 +4,7 @@ Both the state and the functions are going be passed using the context API impor
 import React, { Component } from 'react'
 import { storeProducts } from './data'
 import { createFragmentContainer } from 'react-relay'
-import graphql from 'babel-plugin-relay/macro.d.ts';
+import graphql from 'babel-plugin-relay/macro.js';
 
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
