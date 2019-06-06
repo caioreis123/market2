@@ -2,7 +2,6 @@
 
 import React from 'react'
 import CartItem from './CartItem'
-import { createFragmentContainer, graphql } from 'react-relay'
 
 function CartList({ value }) {
     const { cart } = value
@@ -21,6 +20,4 @@ function CartList({ value }) {
     )
 }
 
-export default createFragmentContainer(CartList, graphql`
-    fragment 
-`)
+export default CartList

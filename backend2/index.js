@@ -6,8 +6,8 @@ const { GraphQLServer } = require('graphql-yoga')
 //import the Prisma Client instance:
 const { prisma } = require('./generated/prisma-client')
 
-//import the data
-const { storeProducts: data } = require('../src/Data/data2')
+//import the data as if it was a database
+const { storeProducts: data } = require('../backend2/Data/data2')
 
 // Resolver functions implement the GraphQL schema.
 // Tells the server HOW to resolve api operations.

@@ -9,8 +9,6 @@ import CardMedia from '@material-ui/core/CardMedia'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import compose from 'recompose/compose'
-import { createFragmentContainer, graphql } from 'react-relay'
-//import graphql from 'babel-plugin-relay/macro';
 
 const styles = theme => ({
     card: {
@@ -123,18 +121,6 @@ CartItem.propTypes = {
 //export default withStyles(styles, { withTheme: true })(CardItem);
 
 export default compose(
-    createFragmentContainer(CartItem, graphql`
-        CartItem_individualProduct on CartItem{
-            id
-            title
-            img
-            price
-            total
-            count
-            company
-        }
-    `),
-
     withStyles(styles, {
         withTheme: true,
         name: 'CartItem',

@@ -33,6 +33,7 @@
         "not op_mini all"
     ],
     "devDependencies": {
+        "@types/react-relay": "^1.3.14",
         "babel-plugin-macros": "^2.6.0",
         "relay-compiler": "^4.0.0"
     }
