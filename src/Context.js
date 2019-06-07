@@ -1,4 +1,8 @@
-/* in this page we define all the functions as the only state of the whole app. 
+/*
+1)index.js
+2)App.js
+3)Context.js
+In this page we define all the functions as the only state of the whole app. 
 Both the state and the functions are going be passed using the context API imported in the index.js file */
 
 import React, { Component } from 'react'

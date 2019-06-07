@@ -44,8 +44,6 @@ const ProductList = props => {
                 return (
                     <div className={classes.root}>
                         <GridList rows={2} cols={responsiveCols()} cellHeight={250}>
-                            <GridListTile cols={4} key="Subheader" style={{ height: 'auto' }}>
-                            </GridListTile>
                             {value.products.map(tile => (
                                 <GridListTile key={tile.id}>
                                     <Link to='/details'>
@@ -72,7 +70,6 @@ const ProductList = props => {
                         </GridList>
                     </div>
                 )
-
             }}
         </MyConsumer>
     );
