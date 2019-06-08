@@ -7,15 +7,15 @@ Both the state and the functions are going be passed using the context API impor
 
 import React, { Component } from 'react'
 import { storeProducts } from './data'
-import { createFragmentContainer } from 'react-relay'
+import { QueryRenderer } from 'react-relay'
 import graphql from 'babel-plugin-relay/macro.js';
 
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
 export class MyProvider extends Component {
     state = {
-        products: [],
-        detailProduct: [],
+        products: [], /* all products are mapped and displayed at the store */
+        detailProduct: [], /* just the clicked product is mounted in the details page */
         cart: [],
         cartTotalValue: 0,
         totalInCart: 0,
