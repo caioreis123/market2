@@ -17,7 +17,7 @@
         "typeface-roboto": "0.0.54"
     },
     "scripts": {
-        "relay": "relay-compiler --src ./src --schema ./src/schema.graphql",
+        "relay": "relay-compiler --src ./src --schema ./schema.graphql",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",

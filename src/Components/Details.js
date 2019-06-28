@@ -4,6 +4,10 @@ import { Grid, withStyles, Button, Icon } from '@material-ui/core'
 import { MyConsumer } from './../Context'
 import { Link } from 'react-router-dom'
 
+//relay imports:
+import graphql from 'babel-plugin-relay/macro'
+import { createFragmentContainer } from 'react-relay'
+
 const styles = (theme) => ({
     root: {
         width: '70%',
@@ -66,4 +70,19 @@ const Details = props => {
     )
 }
 
-export default withStyles(styles)(Details);
+const DetailsFragment = graphql`
+    fragment Details_viewer on Product{
+        id
+        title
+        img
+        price
+        subTotal
+        count
+        company
+        info
+    }
+`
+
+//export default withStyles(styles)(Details);
+//export default withStyles(styles)(createFragmentContainer(Details, DetailsFragment)(Details));
+export default createFragmentContainer(Details, DetailsFragment)(withStyles(styles)(Details))

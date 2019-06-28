@@ -114,8 +114,8 @@ export type ProductOrderByInput =
   | "info_DESC"
   | "price_ASC"
   | "price_DESC"
-  | "total_ASC"
-  | "total_DESC"
+  | "subTotal_ASC"
+  | "subTotal_DESC"
   | "count_ASC"
   | "count_DESC"
   | "stock_ASC"
@@ -204,14 +204,14 @@ export interface ProductWhereInput {
   price_lte?: Maybe<Float>;
   price_gt?: Maybe<Float>;
   price_gte?: Maybe<Float>;
-  total?: Maybe<Float>;
-  total_not?: Maybe<Float>;
-  total_in?: Maybe<Float[] | Float>;
-  total_not_in?: Maybe<Float[] | Float>;
-  total_lt?: Maybe<Float>;
-  total_lte?: Maybe<Float>;
-  total_gt?: Maybe<Float>;
-  total_gte?: Maybe<Float>;
+  subTotal?: Maybe<Float>;
+  subTotal_not?: Maybe<Float>;
+  subTotal_in?: Maybe<Float[] | Float>;
+  subTotal_not_in?: Maybe<Float[] | Float>;
+  subTotal_lt?: Maybe<Float>;
+  subTotal_lte?: Maybe<Float>;
+  subTotal_gt?: Maybe<Float>;
+  subTotal_gte?: Maybe<Float>;
   count?: Maybe<Int>;
   count_not?: Maybe<Int>;
   count_in?: Maybe<Int[] | Int>;
@@ -242,7 +242,7 @@ export interface ProductCreateInput {
   company: String;
   info: String;
   price: Float;
-  total: Float;
+  subTotal: Float;
   count: Int;
   stock: Int;
   inCart: Boolean;
@@ -254,7 +254,7 @@ export interface ProductUpdateInput {
   company?: Maybe<String>;
   info?: Maybe<String>;
   price?: Maybe<Float>;
-  total?: Maybe<Float>;
+  subTotal?: Maybe<Float>;
   count?: Maybe<Int>;
   stock?: Maybe<Int>;
   inCart?: Maybe<Boolean>;
@@ -266,7 +266,7 @@ export interface ProductUpdateManyMutationInput {
   company?: Maybe<String>;
   info?: Maybe<String>;
   price?: Maybe<Float>;
-  total?: Maybe<Float>;
+  subTotal?: Maybe<Float>;
   count?: Maybe<Int>;
   stock?: Maybe<Int>;
   inCart?: Maybe<Boolean>;
@@ -315,7 +315,7 @@ export interface ProductPreviousValues {
   company: String;
   info: String;
   price: Float;
-  total: Float;
+  subTotal: Float;
   count: Int;
   stock: Int;
   inCart: Boolean;
@@ -330,7 +330,7 @@ export interface ProductPreviousValuesPromise
   company: () => Promise<String>;
   info: () => Promise<String>;
   price: () => Promise<Float>;
-  total: () => Promise<Float>;
+  subTotal: () => Promise<Float>;
   count: () => Promise<Int>;
   stock: () => Promise<Int>;
   inCart: () => Promise<Boolean>;
@@ -345,7 +345,7 @@ export interface ProductPreviousValuesSubscription
   company: () => Promise<AsyncIterator<String>>;
   info: () => Promise<AsyncIterator<String>>;
   price: () => Promise<AsyncIterator<Float>>;
-  total: () => Promise<AsyncIterator<Float>>;
+  subTotal: () => Promise<AsyncIterator<Float>>;
   count: () => Promise<AsyncIterator<Int>>;
   stock: () => Promise<AsyncIterator<Int>>;
   inCart: () => Promise<AsyncIterator<Boolean>>;
@@ -438,7 +438,7 @@ export interface Product {
   company: String;
   info: String;
   price: Float;
-  total: Float;
+  subTotal: Float;
   count: Int;
   stock: Int;
   inCart: Boolean;
@@ -451,7 +451,7 @@ export interface ProductPromise extends Promise<Product>, Fragmentable {
   company: () => Promise<String>;
   info: () => Promise<String>;
   price: () => Promise<Float>;
-  total: () => Promise<Float>;
+  subTotal: () => Promise<Float>;
   count: () => Promise<Int>;
   stock: () => Promise<Int>;
   inCart: () => Promise<Boolean>;
@@ -466,7 +466,7 @@ export interface ProductSubscription
   company: () => Promise<AsyncIterator<String>>;
   info: () => Promise<AsyncIterator<String>>;
   price: () => Promise<AsyncIterator<Float>>;
-  total: () => Promise<AsyncIterator<Float>>;
+  subTotal: () => Promise<AsyncIterator<Float>>;
   count: () => Promise<AsyncIterator<Int>>;
   stock: () => Promise<AsyncIterator<Int>>;
   inCart: () => Promise<AsyncIterator<Boolean>>;
@@ -481,7 +481,7 @@ export interface ProductNullablePromise
   company: () => Promise<String>;
   info: () => Promise<String>;
   price: () => Promise<Float>;
-  total: () => Promise<Float>;
+  subTotal: () => Promise<Float>;
   count: () => Promise<Int>;
   stock: () => Promise<Int>;
   inCart: () => Promise<Boolean>;

@@ -5,7 +5,7 @@ type Product {
     company: String!
     info: String!
     price: Float!   """ single price of this item """
-    total: Float!   """ subtotal of this item (price * count) """
+    subTotal: Float!   """ subtotal of this item (price * count) """
     count: Int!     """ quantity of this item in cart """
     stock: Int!     """ quantity of this item in stock """
     inCart: Boolean!

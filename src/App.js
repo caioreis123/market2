@@ -13,27 +13,52 @@ import Cart from './Components/Cart/Cart'
 import Details from './Components/Details'
 import ProductList from './Components/ProductList'
 
+//relay imports:
+import environment from './environment'
+import { QueryRenderer } from 'react-relay'
+import graphql from 'babel-plugin-relay/macro'
+
+//root query for relay (it is going to store all the queries of the app):
+const AppQuery = graphql`
+    query AppQuery {
+        products{
+            ...Details_viewer
+        }
+    }
+`
+
 class App extends Component {
     render() {
         return (
-            <React.Fragment>
-                <CssBaseline />
-                <Navbar />
-                <Switch>
+            <QueryRenderer
+                environment={environment}
+                query={AppQuery}
+                render={({ error, props }) => {
+                    if (error) {
+                        return <div>{error.message}</div>
+                    } else if (!props) {
+                        return <div>Loading...</div>
+                    }
+                    return <React.Fragment>
+                        <CssBaseline />
+                        <Navbar />
+                        <Switch>
 
-                    <Route exact path="/" component={ProductList} />
+                            <Route exact path="/" component={ProductList} />
 
-                    {/*the path is just a bar because is the homepage (localhost:3000), 
-          the second attribute points the component where the rout is going to. 
-          The path must be exact because all the other pages also stars with the single forward slash 
-                    so the home page keeps showing in front of the other pages when they are called.  */}
+                            {/*the path is just a bar because is the homepage (localhost:3000), 
+                            the second attribute points the component where the rout is going to. 
+                            The path must be exact because all the other pages also stars with the single forward slash 
+                            so the home page keeps showing in front of the other pages when they are called.  */}
 
-                    <Route path='/details' component={Details} />
+                            <Route path='/details' render={(props) => <Details {...props} viewer={props.viewer} />} />
 
-                    <Route path='/cart' component={Cart} />
+                            <Route path='/cart' component={Cart} />
 
-                </Switch>
-            </React.Fragment>
+                        </Switch>
+                    </React.Fragment>
+                }}
+            />
         );
     }
 }

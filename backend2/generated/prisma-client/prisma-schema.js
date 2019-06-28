@@ -46,7 +46,7 @@ type Product {
   company: String!
   info: String!
   price: Float!
-  total: Float!
+  subTotal: Float!
   count: Int!
   stock: Int!
   inCart: Boolean!
@@ -65,7 +65,7 @@ input ProductCreateInput {
   company: String!
   info: String!
   price: Float!
-  total: Float!
+  subTotal: Float!
   count: Int!
   stock: Int!
   inCart: Boolean!
@@ -89,8 +89,8 @@ enum ProductOrderByInput {
   info_DESC
   price_ASC
   price_DESC
-  total_ASC
-  total_DESC
+  subTotal_ASC
+  subTotal_DESC
   count_ASC
   count_DESC
   stock_ASC
@@ -106,7 +106,7 @@ type ProductPreviousValues {
   company: String!
   info: String!
   price: Float!
-  total: Float!
+  subTotal: Float!
   count: Int!
   stock: Int!
   inCart: Boolean!
@@ -136,7 +136,7 @@ input ProductUpdateInput {
   company: String
   info: String
   price: Float
-  total: Float
+  subTotal: Float
   count: Int
   stock: Int
   inCart: Boolean
@@ -148,7 +148,7 @@ input ProductUpdateManyMutationInput {
   company: String
   info: String
   price: Float
-  total: Float
+  subTotal: Float
   count: Int
   stock: Int
   inCart: Boolean
@@ -233,14 +233,14 @@ input ProductWhereInput {
   price_lte: Float
   price_gt: Float
   price_gte: Float
-  total: Float
-  total_not: Float
-  total_in: [Float!]
-  total_not_in: [Float!]
-  total_lt: Float
-  total_lte: Float
-  total_gt: Float
-  total_gte: Float
+  subTotal: Float
+  subTotal_not: Float
+  subTotal_in: [Float!]
+  subTotal_not_in: [Float!]
+  subTotal_lt: Float
+  subTotal_lte: Float
+  subTotal_gt: Float
+  subTotal_gte: Float
   count: Int
   count_not: Int
   count_in: [Int!]
