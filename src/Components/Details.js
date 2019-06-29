@@ -44,7 +44,7 @@ const SimpleDetails = props => {
                         className={classes.root}
                     >
                         <Grid item xs={12}>
-                            <h1>{title}</h1>
+                            <h1>{props.products.title}</h1>
                         </Grid>
                         <Grid item xs={6} className={classes.img}>
                             <img src={img} alt='product' />
@@ -70,8 +70,9 @@ const SimpleDetails = props => {
     )
 }
 
-const DetailsFragment = graphql`
-    fragment Details_viewer on Product{
+/* let DetailsFragment = {
+    products: graphql`
+    fragment Details_products on Product{
         id
         title
         img
@@ -81,8 +82,22 @@ const DetailsFragment = graphql`
         company
         info
     }
-`
-const Details = createFragmentContainer(SimpleDetails, DetailsFragment)
+`} */
+
+const Details = createFragmentContainer(SimpleDetails, {
+    products: graphql`
+    fragment Details_products on Product{
+        id
+        title
+        img
+        price
+        subTotal
+        count
+        company
+        info
+    }
+`})
+
 export default withStyles(styles)(Details);
 
 //export default withStyles(styles)(Details);

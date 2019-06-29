@@ -9,9 +9,9 @@
 /*::
 import type { ReaderFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type Details_viewer$ref: FragmentReference;
-declare export opaque type Details_viewer$fragmentType: Details_viewer$ref;
-export type Details_viewer = {|
+declare export opaque type Details_products$ref: FragmentReference;
+declare export opaque type Details_products$fragmentType: Details_products$ref;
+export type Details_products = {|
   +id: string,
   +title: string,
   +img: string,
@@ -20,19 +20,19 @@ export type Details_viewer = {|
   +count: number,
   +company: string,
   +info: string,
-  +$refType: Details_viewer$ref,
+  +$refType: Details_products$ref,
 |};
-export type Details_viewer$data = Details_viewer;
-export type Details_viewer$key = {
-  +$data?: Details_viewer$data,
-  +$fragmentRefs: Details_viewer$ref,
+export type Details_products$data = Details_products;
+export type Details_products$key = {
+  +$data?: Details_products$data,
+  +$fragmentRefs: Details_products$ref,
 };
 */
 
 
 const node/*: ReaderFragment*/ = {
   "kind": "Fragment",
-  "name": "Details_viewer",
+  "name": "Details_products",
   "type": "Product",
   "metadata": null,
   "argumentDefinitions": [],
@@ -96,5 +96,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'e3119f79f558df6125efaa91c1395342';
+(node/*: any*/).hash = '057764c72d3df0dcc9447048728d6747';
 module.exports = node;

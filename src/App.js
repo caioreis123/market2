@@ -22,7 +22,7 @@ import graphql from 'babel-plugin-relay/macro'
 const AppQuery = graphql`
     query AppQuery {
         products{
-            ...Details_viewer
+            ...Details_products
         }
     }
 `
@@ -51,7 +51,7 @@ class App extends Component {
                             The path must be exact because all the other pages also stars with the single forward slash 
                             so the home page keeps showing in front of the other pages when they are called.  */}
 
-                            <Route path='/details' render={(props) => <Details {...props} viewer={props.viewer} />} />
+                            <Route path='/details' render={(props) => <Details {...props} products={props.products} />} />
 
                             <Route path='/cart' component={Cart} />
 
