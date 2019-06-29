@@ -28,7 +28,7 @@ const styles = (theme) => ({
     }
 });
 
-const Details = props => {
+const SimpleDetails = props => {
     const { classes } = props;
     return (
         <MyConsumer>
@@ -82,7 +82,10 @@ const DetailsFragment = graphql`
         info
     }
 `
+const Details = createFragmentContainer(SimpleDetails, DetailsFragment)
+export default withStyles(styles)(Details);
 
 //export default withStyles(styles)(Details);
+
 //export default withStyles(styles)(createFragmentContainer(Details, DetailsFragment)(Details));
-export default createFragmentContainer(Details, DetailsFragment)(withStyles(styles)(Details))
+//export default createFragmentContainer(Details, DetailsFragment)(withStyles(styles)(Details))
