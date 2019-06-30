@@ -35,7 +35,9 @@ const resolvers = {
         },
         item: (root, args) => {
             const index = args.id - 1
-            return data[index]
+            return data[index]({
+                where: { id: args.id }
+            })
         },
     },
     Mutation: {

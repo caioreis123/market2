@@ -44,7 +44,7 @@ const SimpleDetails = props => {
                         className={classes.root}
                     >
                         <Grid item xs={12}>
-                            <h1>{props.products.title}</h1>
+                            <h1>{props.product.title}</h1>
                         </Grid>
                         <Grid item xs={6} className={classes.img}>
                             <img src={img} alt='product' />
@@ -85,8 +85,8 @@ const SimpleDetails = props => {
 `} */
 
 const Details = createFragmentContainer(SimpleDetails, {
-    products: graphql`
-    fragment Details_products on Product{
+    product: graphql`
+    fragment Details_product on Product{
         id
         title
         img

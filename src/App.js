@@ -20,9 +20,9 @@ import graphql from 'babel-plugin-relay/macro'
 
 //root query for relay (it is going to store all the queries of the app):
 const AppQuery = graphql`
-    query AppQuery {
-        products{
-            ...Details_products
+    query AppQuery ($productID: ID!) {
+        product (id: productID){
+            ...Details_product
         }
     }
 `
@@ -51,7 +51,7 @@ class App extends Component {
                             The path must be exact because all the other pages also stars with the single forward slash 
                             so the home page keeps showing in front of the other pages when they are called.  */}
 
-                            <Route path='/details' render={(props) => <Details {...props} products={props.products} />} />
+                            <Route path='/details' render={(props) => <Details {...props} product={props.product} />} />
 
                             <Route path='/cart' component={Cart} />
 

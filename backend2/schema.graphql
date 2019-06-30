@@ -1,7 +1,7 @@
 # ROOT TYPES:
 type Query {
   all: [Product!]!
-  item (id:Int!): Product!
+  item (id:ID!): Product!
 }
 
 type Mutation {
@@ -16,7 +16,7 @@ type Mutation {
 ################################################################
 # OBJECT TYPES:
 type Product {
-    id: Int!
+    id: ID!
     title: String!
     img: String!
     company: String!
