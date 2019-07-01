@@ -20,19 +20,25 @@ import graphql from 'babel-plugin-relay/macro'
 
 //root query for relay (it is going to store all the queries of the app):
 const AppQuery = graphql`
-    query AppQuery ($productID: ID!) {
-        product (id: productID){
+    query AppQuery ($ID: ProductWhereUniqueInput!) {
+        product (where: $ID){
             ...Details_product
+        }
+        products{
+            ...ProductList_products
         }
     }
 `
 
 class App extends Component {
     render() {
+        //this id is a test only and should be deleted later
+        let id = 2
         return (
             <QueryRenderer
                 environment={environment}
                 query={AppQuery}
+                variables={{ ID: { id } }}
                 render={({ error, props }) => {
                     if (error) {
                         return <div>{error.message}</div>
@@ -44,7 +50,7 @@ class App extends Component {
                         <Navbar />
                         <Switch>
 
-                            <Route exact path="/" component={ProductList} />
+                            <Route exact path="/" render={(props) => <ProductList {...props} products={props.products} />} />
 
                             {/*the path is just a bar because is the homepage (localhost:3000), 
                             the second attribute points the component where the rout is going to. 

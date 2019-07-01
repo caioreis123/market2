@@ -86,17 +86,18 @@ const SimpleDetails = props => {
 
 const Details = createFragmentContainer(SimpleDetails, {
     product: graphql`
-    fragment Details_product on Product{
-        id
-        title
-        img
-        price
-        subTotal
-        count
-        company
-        info
-    }
-`})
+        fragment Details_product on Product{
+            id
+            title
+            img
+            price
+            subTotal
+            count
+            company
+            info
+        }
+    `
+})
 
 export default withStyles(styles)(Details);
 

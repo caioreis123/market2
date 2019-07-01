@@ -7,6 +7,10 @@ import { withWidth, IconButton, GridListTileBar, GridListTile, GridList, withSty
 import { Link } from 'react-router-dom'
 import { MyConsumer } from './../Context'
 
+//relay imports:
+import graphql from 'babel-plugin-relay/macro'
+import { createFragmentContainer } from 'react-relay'
+
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -20,7 +24,7 @@ const styles = theme => ({
     },
 });
 
-const ProductList = props => {
+const SimpleProductList = props => {
     const { classes } = props;
 
     const responsiveCols = () => {
@@ -71,15 +75,34 @@ const ProductList = props => {
 
 }
 
-ProductList.propTypes = {
+SimpleProductList.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
+const SimpleProductListWithStyles = withStyles(styles)(SimpleProductList)
+const SimpleProductListWithStylesWithWidth = withWidth()(SimpleProductListWithStyles)
+const ProductList = createFragmentContainer(SimpleProductListWithStylesWithWidth, {
+    products: graphql`
+        fragment ProductList_products on Product{
+            id
+            title
+            img
+            price
+            subTotal
+            count
+            company
+            info
+        }
+    `
+})
+
 //export default withStyles(styles)(ProductList);
 
-export default compose(
+/* export default compose(
     withStyles(styles, {
         name: 'ProductList',
     }),
     withWidth(),
-)(ProductList);
+)(ProductList); */
+
+export default ProductList
