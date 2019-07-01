@@ -17,6 +17,7 @@
         "typeface-roboto": "0.0.54"
     },
     "scripts": {
+        "schema": "get-graphql-schema https://us1.prisma.sh/caio-reis-372c29/backend2/dev > ./schema.graphql",
         "relay": "relay-compiler --src ./src --schema ./schema.graphql",
         "start": "react-scripts start",
         "build": "react-scripts build",

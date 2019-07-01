@@ -3,7 +3,6 @@ The App.js will define the 3 different pages of the app: home, details and store
 
 import React, { Component } from 'react';
 import './App.css';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar'
 import Cart from './Components/Cart/Cart'
@@ -46,7 +45,6 @@ class App extends Component {
                         return <div>Loading...</div>
                     }
                     return <React.Fragment>
-                        <CssBaseline />
                         <Navbar />
                         <Switch>
 
@@ -57,7 +55,7 @@ class App extends Component {
                             The path must be exact because all the other pages also stars with the single forward slash 
                             so the home page keeps showing in front of the other pages when they are called.  */}
 
-                            <Route path='/details' render={(props) => <Details {...props} product={props.product} />} />
+                            <Route path='/details' render={() => <Details {...props} product={props.product} />} />
 
                             <Route path='/cart' component={Cart} />
 
