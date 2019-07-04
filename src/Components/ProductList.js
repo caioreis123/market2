@@ -82,6 +82,27 @@ SimpleProductList.propTypes = {
 const SimpleProductListWithStyles = withStyles(styles)(SimpleProductList)
 const SimpleProductListWithStylesWithWidth = withWidth()(SimpleProductListWithStyles)
 const ProductList = createFragmentContainer(SimpleProductListWithStylesWithWidth, {
+    productsConnection: graphql`
+        fragment ProductList_productsConnection on ProductConnection{
+            edges{
+                node{
+                    id
+                    title
+                    img
+                    price
+                    subTotal
+                    count
+                    company
+                    info
+                }
+            }
+        }
+    `
+})
+
+
+
+/* const ProductList = createFragmentContainer(SimpleProductListWithStylesWithWidth, {
     products: graphql`
         fragment ProductList_products on Product{
             id
@@ -94,7 +115,7 @@ const ProductList = createFragmentContainer(SimpleProductListWithStylesWithWidth
             info
         }
     `
-})
+}) */
 
 //export default withStyles(styles)(ProductList);
 

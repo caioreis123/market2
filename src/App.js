@@ -23,8 +23,8 @@ const AppQuery = graphql`
         product (where: $ID){
             ...Details_product
         }
-        products{
-            ...ProductList_products
+        productsConnection (first: 2147483647) {
+            ...ProductList_productsConnection
         }
     }
 `
@@ -48,7 +48,7 @@ class App extends Component {
                         <Navbar />
                         <Switch>
 
-                            <Route exact path="/" render={(props) => <ProductList {...props} products={props.products} />} />
+                            <Route exact path="/" render={() => <ProductList {...props} productsConnection={props.productsConnection} />} />
 
                             {/*the path is just a bar because is the homepage (localhost:3000), 
                             the second attribute points the component where the rout is going to. 

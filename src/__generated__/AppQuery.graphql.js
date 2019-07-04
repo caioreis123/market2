@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5523fd80f14c6198f5fb2259bd74c491
+ * @relayHash 12c08637e8d0a8af538e644513d369d4
  */
 
 /* eslint-disable */
@@ -10,7 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type Details_product$ref = any;
-type ProductList_products$ref = any;
+type ProductList_productsConnection$ref = any;
 export type ProductWhereUniqueInput = {|
   id?: ?string
 |};
@@ -21,9 +21,9 @@ export type AppQueryResponse = {|
   +product: ?{|
     +$fragmentRefs: Details_product$ref
   |},
-  +products: $ReadOnlyArray<?{|
-    +$fragmentRefs: ProductList_products$ref
-  |}>,
+  +productsConnection: {|
+    +$fragmentRefs: ProductList_productsConnection$ref
+  |},
 |};
 export type AppQuery = {|
   variables: AppQueryVariables,
@@ -40,9 +40,8 @@ query AppQuery(
     ...Details_product
     id
   }
-  products {
-    ...ProductList_products
-    id
+  productsConnection(first: 2147483647) {
+    ...ProductList_productsConnection
   }
 }
 
@@ -57,15 +56,19 @@ fragment Details_product on Product {
   info
 }
 
-fragment ProductList_products on Product {
-  id
-  title
-  img
-  price
-  subTotal
-  count
-  company
-  info
+fragment ProductList_productsConnection on ProductConnection {
+  edges {
+    node {
+      id
+      title
+      img
+      price
+      subTotal
+      count
+      company
+      info
+    }
+  }
 }
 */
 
@@ -86,6 +89,13 @@ v1 = [
   }
 ],
 v2 = [
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 2147483647
+  }
+],
+v3 = [
   {
     "kind": "ScalarField",
     "alias": null,
@@ -171,15 +181,15 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "products",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Product",
-        "plural": true,
+        "name": "productsConnection",
+        "storageKey": "productsConnection(first:2147483647)",
+        "args": (v2/*: any*/),
+        "concreteType": "ProductConnection",
+        "plural": false,
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "ProductList_products",
+            "name": "ProductList_productsConnection",
             "args": null
           }
         ]
@@ -199,17 +209,39 @@ return {
         "args": (v1/*: any*/),
         "concreteType": "Product",
         "plural": false,
-        "selections": (v2/*: any*/)
+        "selections": (v3/*: any*/)
       },
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "products",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Product",
-        "plural": true,
-        "selections": (v2/*: any*/)
+        "name": "productsConnection",
+        "storageKey": "productsConnection(first:2147483647)",
+        "args": (v2/*: any*/),
+        "concreteType": "ProductConnection",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "edges",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "ProductEdge",
+            "plural": true,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "node",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "Product",
+                "plural": false,
+                "selections": (v3/*: any*/)
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -217,11 +249,11 @@ return {
     "operationKind": "query",
     "name": "AppQuery",
     "id": null,
-    "text": "query AppQuery(\n  $ID: ProductWhereUniqueInput!\n) {\n  product(where: $ID) {\n    ...Details_product\n    id\n  }\n  products {\n    ...ProductList_products\n    id\n  }\n}\n\nfragment Details_product on Product {\n  id\n  title\n  img\n  price\n  subTotal\n  count\n  company\n  info\n}\n\nfragment ProductList_products on Product {\n  id\n  title\n  img\n  price\n  subTotal\n  count\n  company\n  info\n}\n",
+    "text": "query AppQuery(\n  $ID: ProductWhereUniqueInput!\n) {\n  product(where: $ID) {\n    ...Details_product\n    id\n  }\n  productsConnection(first: 2147483647) {\n    ...ProductList_productsConnection\n  }\n}\n\nfragment Details_product on Product {\n  id\n  title\n  img\n  price\n  subTotal\n  count\n  company\n  info\n}\n\nfragment ProductList_productsConnection on ProductConnection {\n  edges {\n    node {\n      id\n      title\n      img\n      price\n      subTotal\n      count\n      company\n      info\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '88d1a682a57b0c7a3426d865a5810d51';
+(node/*: any*/).hash = '91cc0d3dd3c06e752f29e8c525f50951';
 module.exports = node;
