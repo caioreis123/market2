@@ -33,7 +33,6 @@ const SimpleDetails = props => {
     return (
         <MyConsumer>
             {value => {
-                const { id, company, img, info, price, title } = value.detailProduct
                 return (
                     <Grid
                         container
@@ -47,18 +46,18 @@ const SimpleDetails = props => {
                             <h1>{props.product.title}</h1>
                         </Grid>
                         <Grid item xs={6} className={classes.img}>
-                            <img src={img} alt='product' />
+                            <img src={props.product.img} alt='product' />
                         </Grid>
                         <Grid item xs={6} className={classes.txt} justify='flex-start' >
-                            <h2 className={classes.made}>MADE BY: {company}</h2>
-                            <h3>Price: ${price}</h3>
+                            <h2 className={classes.made}>MADE BY: {props.product.company}</h2>
+                            <h3>Price: ${props.product.price}</h3>
                             <p> <strong>Some Info About the Product: </strong></p>
-                            <p>{info}</p>
+                            <p>{props.product.info}</p>
                             <Button component={Link} to='/' variant="contained" className={classes.btn}>
                                 <Icon>keyboard_backspace</Icon>
                                 Back to Store
                             </Button>
-                            <Button onClick={() => { value.addToCart(id) }} variant="contained" color="primary" className={classes.btn}>
+                            <Button onClick={() => { value.addToCart(props.product.id) }} variant="contained" color="primary" className={classes.btn}>
                                 {"Add to Cart"}
                                 <Icon>add_shopping_cart</Icon>
                             </Button>

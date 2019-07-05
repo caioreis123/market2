@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 12c08637e8d0a8af538e644513d369d4
+ * @relayHash 16df35598a201842d4e0d83d4a9fb588
  */
 
 /* eslint-disable */
@@ -40,7 +40,7 @@ query AppQuery(
     ...Details_product
     id
   }
-  productsConnection(first: 2147483647) {
+  productsConnection(first: 100) {
     ...ProductList_productsConnection
   }
 }
@@ -92,7 +92,7 @@ v2 = [
   {
     "kind": "Literal",
     "name": "first",
-    "value": 2147483647
+    "value": 100
   }
 ],
 v3 = [
@@ -182,7 +182,7 @@ return {
         "kind": "LinkedField",
         "alias": null,
         "name": "productsConnection",
-        "storageKey": "productsConnection(first:2147483647)",
+        "storageKey": "productsConnection(first:100)",
         "args": (v2/*: any*/),
         "concreteType": "ProductConnection",
         "plural": false,
@@ -215,7 +215,7 @@ return {
         "kind": "LinkedField",
         "alias": null,
         "name": "productsConnection",
-        "storageKey": "productsConnection(first:2147483647)",
+        "storageKey": "productsConnection(first:100)",
         "args": (v2/*: any*/),
         "concreteType": "ProductConnection",
         "plural": false,
@@ -249,11 +249,11 @@ return {
     "operationKind": "query",
     "name": "AppQuery",
     "id": null,
-    "text": "query AppQuery(\n  $ID: ProductWhereUniqueInput!\n) {\n  product(where: $ID) {\n    ...Details_product\n    id\n  }\n  productsConnection(first: 2147483647) {\n    ...ProductList_productsConnection\n  }\n}\n\nfragment Details_product on Product {\n  id\n  title\n  img\n  price\n  subTotal\n  count\n  company\n  info\n}\n\nfragment ProductList_productsConnection on ProductConnection {\n  edges {\n    node {\n      id\n      title\n      img\n      price\n      subTotal\n      count\n      company\n      info\n    }\n  }\n}\n",
+    "text": "query AppQuery(\n  $ID: ProductWhereUniqueInput!\n) {\n  product(where: $ID) {\n    ...Details_product\n    id\n  }\n  productsConnection(first: 100) {\n    ...ProductList_productsConnection\n  }\n}\n\nfragment Details_product on Product {\n  id\n  title\n  img\n  price\n  subTotal\n  count\n  company\n  info\n}\n\nfragment ProductList_productsConnection on ProductConnection {\n  edges {\n    node {\n      id\n      title\n      img\n      price\n      subTotal\n      count\n      company\n      info\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '91cc0d3dd3c06e752f29e8c525f50951';
+(node/*: any*/).hash = 'da96979824b70f4a78eb07ab72668543';
 module.exports = node;

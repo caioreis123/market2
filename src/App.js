@@ -23,7 +23,7 @@ const AppQuery = graphql`
         product (where: $ID){
             ...Details_product
         }
-        productsConnection (first: 2147483647) {
+        productsConnection (first:100) {
             ...ProductList_productsConnection
         }
     }

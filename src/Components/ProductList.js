@@ -43,22 +43,22 @@ const SimpleProductList = props => {
                 return (
                     <div className={classes.root}>
                         <GridList rows={2} cols={responsiveCols()} cellHeight={250}>
-                            {value.products.map(tile => (
-                                <GridListTile key={tile.id}>
+                            {props.productsConnection.edges.map(tile => (
+                                <GridListTile key={tile.node.id}>
                                     <Link to='/details'>
                                         <img
-                                            src={tile.img}
-                                            alt={tile.title}
+                                            src={tile.node.img}
+                                            alt={tile.node.title}
                                             width="250"
                                             height="250"
-                                            onClick={() => value.handleDetail(tile.id)} />
+                                            onClick={() => value.handleDetail(tile.node.id)} />
                                     </Link>
                                     <GridListTileBar
-                                        title={tile.title}
-                                        subtitle={<span>$: {tile.price}</span>}
+                                        title={tile.node.title}
+                                        subtitle={<span>$: {tile.node.price}</span>}
                                         actionIcon={
                                             <IconButton
-                                                onClick={() => { value.addToCart(tile.id) }}
+                                                onClick={() => { value.addToCart(tile.node.id) }}
                                                 className={classes.icon}>
                                                 <i class="material-icons">add_shopping_cart</i>
                                             </IconButton>
