@@ -29,7 +29,7 @@ const styles = (theme) => ({
 });
 
 const SimpleDetails = props => {
-    const { classes } = props;
+    const { classes, match } = props;
     return (
         <MyConsumer>
             {value => {
@@ -69,23 +69,12 @@ const SimpleDetails = props => {
     )
 }
 
-/* let DetailsFragment = {
-    products: graphql`
-    fragment Details_products on Product{
-        id
-        title
-        img
-        price
-        subTotal
-        count
-        company
-        info
-    }
-`} */
+
 
 const Details = createFragmentContainer(SimpleDetails, {
     product: graphql`
-        fragment Details_product on Product{
+        fragment Details_product on Product {
+            product
             id
             title
             img

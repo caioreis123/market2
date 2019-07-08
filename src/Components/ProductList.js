@@ -45,7 +45,7 @@ const SimpleProductList = props => {
                         <GridList rows={2} cols={responsiveCols()} cellHeight={250}>
                             {props.productsConnection.edges.map(tile => (
                                 <GridListTile key={tile.node.id}>
-                                    <Link to='/details'>
+                                    <Link to={`/details/${tile.node.id}`}>
                                         <img
                                             src={tile.node.img}
                                             alt={tile.node.title}

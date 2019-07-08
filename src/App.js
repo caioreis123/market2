@@ -32,7 +32,7 @@ const AppQuery = graphql`
 class App extends Component {
     render() {
         //this id is a test only and should be deleted later
-        let id = 2
+        let id = 3
         return (
             <QueryRenderer
                 environment={environment}
@@ -55,7 +55,7 @@ class App extends Component {
                             The path must be exact because all the other pages also stars with the single forward slash 
                             so the home page keeps showing in front of the other pages when they are called.  */}
 
-                            <Route path='/details' render={() => <Details {...props} product={props.product} />} />
+                            <Route path='/details/:id' render={() => <Details {...props} product={props.product} />} />
 
                             <Route path='/cart' component={Cart} />
 
