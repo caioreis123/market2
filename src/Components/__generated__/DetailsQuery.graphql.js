@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 88a8c2d3601efc8dfc73bdd8b0f4f4e4
+ * @relayHash 9cb05aa5c815478f6b45fcbc8053ebf8
  */
 
 /* eslint-disable */
@@ -13,26 +13,26 @@ type Details_product$ref = any;
 export type ProductWhereUniqueInput = {|
   id?: ?string
 |};
-export type DetailsRefetchQueryVariables = {|
-  productId: ProductWhereUniqueInput
+export type DetailsQueryVariables = {|
+  ID: ProductWhereUniqueInput
 |};
-export type DetailsRefetchQueryResponse = {|
+export type DetailsQueryResponse = {|
   +product: ?{|
     +$fragmentRefs: Details_product$ref
   |}
 |};
-export type DetailsRefetchQuery = {|
-  variables: DetailsRefetchQueryVariables,
-  response: DetailsRefetchQueryResponse,
+export type DetailsQuery = {|
+  variables: DetailsQueryVariables,
+  response: DetailsQueryResponse,
 |};
 */
 
 
 /*
-query DetailsRefetchQuery(
-  $productId: ProductWhereUniqueInput!
+query DetailsQuery(
+  $ID: ProductWhereUniqueInput!
 ) {
-  product(where: $productId) {
+  product(where: $ID) {
     ...Details_product
     id
   }
@@ -54,7 +54,7 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "productId",
+    "name": "ID",
     "type": "ProductWhereUniqueInput!",
     "defaultValue": null
   }
@@ -63,14 +63,14 @@ v1 = [
   {
     "kind": "Variable",
     "name": "where",
-    "variableName": "productId"
+    "variableName": "ID"
   }
 ];
 return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "DetailsRefetchQuery",
+    "name": "DetailsQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -95,7 +95,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "DetailsRefetchQuery",
+    "name": "DetailsQuery",
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
@@ -169,13 +169,13 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "DetailsRefetchQuery",
+    "name": "DetailsQuery",
     "id": null,
-    "text": "query DetailsRefetchQuery(\n  $productId: ProductWhereUniqueInput!\n) {\n  product(where: $productId) {\n    ...Details_product\n    id\n  }\n}\n\nfragment Details_product on Product {\n  id\n  title\n  img\n  price\n  subTotal\n  count\n  company\n  info\n}\n",
+    "text": "query DetailsQuery(\n  $ID: ProductWhereUniqueInput!\n) {\n  product(where: $ID) {\n    ...Details_product\n    id\n  }\n}\n\nfragment Details_product on Product {\n  id\n  title\n  img\n  price\n  subTotal\n  count\n  company\n  info\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '610d41dc09ae373419b86d869223e0c0';
+(node/*: any*/).hash = '9ea03524fcce42c1883c8641c8d9f46a';
 module.exports = node;
