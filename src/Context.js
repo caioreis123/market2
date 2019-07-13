@@ -8,8 +8,33 @@ Both the state and the functions are going be passed using the context API impor
 import React, { Component } from 'react'
 import { storeProducts } from './data'
 
+//relay imports:
+import environment from './environment'
+import { QueryRenderer } from 'react-relay'
+import graphql from 'babel-plugin-relay/macro'
+
+const ContextQuery = graphql`
+	query ContextQuery {
+		productsConnection {
+			edges {
+				node {
+					id
+					title
+					img
+					price
+					subTotal
+					count
+					company
+					info
+				}
+			}
+		}
+	}
+`
+
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
+
 export class MyProvider extends Component {
 	state = {
 		products: [] /* all products are mapped and displayed at the store */,
@@ -26,7 +51,7 @@ export class MyProvider extends Component {
 
 	deepCopyProducts = () => {
 		let copiedProducts = []
-		storeProducts.forEach((individualProductObject) => {
+		this.props.productsConnection.edges.forEach((individualProductObject) => {
 			let copiedIndividual = { ...individualProductObject }
 			copiedProducts = [ ...copiedProducts, copiedIndividual ]
 		})
@@ -174,19 +199,33 @@ export class MyProvider extends Component {
 
 	render() {
 		return (
-			<MyContext.Provider
-				value={{
-					...this.state,
-					handleDetail: this.handleDetail,
-					addToCart: this.addToCart,
-					increment: this.increment,
-					decrement: this.decrement,
-					removeItem: this.removeItem,
-					deepCopyProducts: this.deepCopyProducts
+			<QueryRenderer
+				environment={environment}
+				query={ContextQuery}
+				variables={{}}
+				render={({ error, props }) => {
+					if (error) {
+						return <div>{error.message}</div>
+					} else if (!props) {
+						return <div>Loading...</div>
+					}
+					return (
+						<MyContext.Provider
+							value={{
+								...this.state,
+								handleDetail: this.handleDetail,
+								addToCart: this.addToCart,
+								increment: this.increment,
+								decrement: this.decrement,
+								removeItem: this.removeItem,
+								deepCopyProducts: this.deepCopyProducts
+							}}
+						>
+							{this.props.children}
+						</MyContext.Provider>
+					)
 				}}
-			>
-				{this.props.children}
-			</MyContext.Provider>
+			/>
 		)
 	}
 }
