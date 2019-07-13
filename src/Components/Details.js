@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 
 //relay imports:
 import graphql from 'babel-plugin-relay/macro'
-import { createFragmentContainer } from 'react-relay'
 import { QueryRenderer } from 'react-relay'
 import environment from '../environment'
 

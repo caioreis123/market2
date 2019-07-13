@@ -17,7 +17,6 @@ import environment from './environment'
 import { QueryRenderer } from 'react-relay'
 import graphql from 'babel-plugin-relay/macro'
 
-//root query for relay (it is going to store all the queries of the app):
 const AppQuery = graphql`
 	query AppQuery {
 		productsConnection(first: 100) {
@@ -28,13 +27,11 @@ const AppQuery = graphql`
 
 class App extends Component {
 	render() {
-		//this id is a test only and should be deleted later
-		let id = 3
 		return (
 			<QueryRenderer
 				environment={environment}
 				query={AppQuery}
-				variables={{ ID: { id } }}
+				variables={{}}
 				render={({ error, props }) => {
 					if (error) {
 						return <div>{error.message}</div>
