@@ -55,10 +55,7 @@ class App extends Component {
                 The path must be exact because all the other pages also stars with the single forward slash 
                 so the home page keeps showing in front of the other pages when they are called.  */}
 
-								<Route
-									path="/details/:id"
-									render={(props) => <Details {...props} product={props.product} />}
-								/>
+								<Route path="/details/:id" render={(props) => <Details {...props} />} />
 
 								<Route path="/cart" component={Cart} />
 							</Switch>
