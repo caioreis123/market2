@@ -9,33 +9,13 @@ import React, { Component } from 'react'
 import { storeProducts } from './data'
 
 //relay imports:
-import environment from './environment'
-import { QueryRenderer } from 'react-relay'
 import graphql from 'babel-plugin-relay/macro'
-
-const ContextQuery = graphql`
-	query ContextQuery {
-		productsConnection {
-			edges {
-				node {
-					id
-					title
-					img
-					price
-					subTotal
-					count
-					company
-					info
-				}
-			}
-		}
-	}
-`
+import { createFragmentContainer } from 'react-relay'
 
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
 
-export class MyProvider extends Component {
+class MyProvider extends Component {
 	state = {
 		products: [] /* all products are mapped and displayed at the store */,
 		detailProduct: [] /* just the clicked product is mounted in the details page */,
@@ -199,33 +179,40 @@ export class MyProvider extends Component {
 
 	render() {
 		return (
-			<QueryRenderer
-				environment={environment}
-				query={ContextQuery}
-				variables={{}}
-				render={({ error, props }) => {
-					if (error) {
-						return <div>{error.message}</div>
-					} else if (!props) {
-						return <div>Loading...</div>
-					}
-					return (
-						<MyContext.Provider
-							value={{
-								...this.state,
-								handleDetail: this.handleDetail,
-								addToCart: this.addToCart,
-								increment: this.increment,
-								decrement: this.decrement,
-								removeItem: this.removeItem,
-								deepCopyProducts: this.deepCopyProducts
-							}}
-						>
-							{this.props.children}
-						</MyContext.Provider>
-					)
+			<MyContext.Provider
+				value={{
+					...this.state,
+					handleDetail: this.handleDetail,
+					addToCart: this.addToCart,
+					increment: this.increment,
+					decrement: this.decrement,
+					removeItem: this.removeItem,
+					deepCopyProducts: this.deepCopyProducts
 				}}
-			/>
+			>
+				{this.props.children}
+			</MyContext.Provider>
 		)
 	}
 }
+
+MyProvider = createFragmentContainer(MyProvider, {
+	productsConnection: graphql`
+		fragment Context_productsConnection on ProductConnection {
+			edges {
+				node {
+					id
+					title
+					img
+					price
+					subTotal
+					count
+					company
+					info
+				}
+			}
+		}
+	`
+})
+
+export { MyProvider }
