@@ -32,7 +32,7 @@ class MyProvider extends Component {
 	deepCopyProducts = () => {
 		let copiedProducts = []
 		this.props.productsConnection.edges.forEach((individualProductObject) => {
-			let copiedIndividual = { ...individualProductObject }
+			let copiedIndividual = { ...individualProductObject.node }
 			copiedProducts = [ ...copiedProducts, copiedIndividual ]
 		})
 		this.setState(() => {

@@ -16,7 +16,7 @@ import environment from './environment'
 
 const srcQuery = graphql`
 	query srcQuery {
-		productsConnection(first: 100) {
+		productsConnection {
 			...Context_productsConnection
 		}
 	}
