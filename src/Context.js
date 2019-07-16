@@ -8,9 +8,14 @@ Both the state and the functions are going be passed using the context API impor
 import React, { Component } from 'react'
 import { storeProducts } from './data'
 
+//relay imports:
+import graphql from 'babel-plugin-relay/macro'
+import { createFragmentContainer } from 'react-relay'
+
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
-export class MyProvider extends Component {
+
+class MyProvider extends Component {
 	state = {
 		products: [] /* all products are mapped and displayed at the store */,
 		detailProduct: [] /* just the clicked product is mounted in the details page */,
@@ -26,8 +31,8 @@ export class MyProvider extends Component {
 
 	deepCopyProducts = () => {
 		let copiedProducts = []
-		storeProducts.forEach((individualProductObject) => {
-			let copiedIndividual = { ...individualProductObject }
+		this.props.productsConnection.edges.forEach((individualProductObject) => {
+			let copiedIndividual = { ...individualProductObject.node }
 			copiedProducts = [ ...copiedProducts, copiedIndividual ]
 		})
 		this.setState(() => {
@@ -190,3 +195,24 @@ export class MyProvider extends Component {
 		)
 	}
 }
+
+MyProvider = createFragmentContainer(MyProvider, {
+	productsConnection: graphql`
+		fragment Context_productsConnection on ProductConnection {
+			edges {
+				node {
+					id
+					title
+					img
+					price
+					subTotal
+					count
+					company
+					info
+				}
+			}
+		}
+	`
+})
+
+export { MyProvider }
