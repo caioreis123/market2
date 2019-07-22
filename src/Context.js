@@ -5,12 +5,12 @@
 In this page we define all the functions as the only state of the whole app. 
 Both the state and the functions are going be passed using the context API imported in the index.js file */
 
-import React, { Component } from 'react'
-import { storeProducts } from './data'
+import React, { Component } from "react"
+import { storeProducts } from "./data"
 
 //relay imports:
-import graphql from 'babel-plugin-relay/macro'
-import { createFragmentContainer } from 'react-relay'
+import graphql from "babel-plugin-relay/macro"
+import { createFragmentContainer } from "react-relay"
 
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
@@ -21,7 +21,7 @@ class MyProvider extends Component {
 		detailProduct: [] /* just the clicked product is mounted in the details page */,
 		cart: [],
 		cartTotalValue: 0,
-		totalInCart: 0
+		totalInCart: 0,
 	}
 
 	componentDidMount() {
@@ -40,7 +40,7 @@ class MyProvider extends Component {
 				products: copiedProducts,
 				cartTotalValue: 0,
 				cart: [],
-				totalInCart: 0
+				totalInCart: 0,
 			}
 		})
 	}
@@ -50,6 +50,22 @@ class MyProvider extends Component {
 	//If we don't use the deep copy we will always be getting the modify values of total,
 	// messing up the total value of the cart.
 	//The deepCopyProducts also does the reset in the cart and cartTotalValue states
+
+	buyMutation = () => {
+		const mutation = graphql`
+			mutation buyMutation($idArray: ProductWhereInput, $changedData: ProductUpdateManyMutationInput!) {
+				updateManyProducts(where: {id_in: $idArray}, data: $changedData) {
+					id
+					title
+					stock
+				}
+			}
+		`
+		const variables = {
+			idArray: this.state.cart.,
+			changedData: ,
+		}
+	}
 
 	getItem = (id) => {
 		const product = this.state.products.find((item) => item.id === id)
@@ -61,7 +77,7 @@ class MyProvider extends Component {
 		const product = this.getItem(id)
 		this.setState(() => {
 			return {
-				detailProduct: product
+				detailProduct: product,
 			}
 		})
 	}
@@ -86,14 +102,14 @@ class MyProvider extends Component {
 			() => {
 				return {
 					products: tempProducts,
-					cart: tempCart
+					cart: tempCart,
 					//while products is a deep copy of all the data with the new changes made by the add cart
 					//the cart state is just the data of the products added to the cart also with the changes
 				}
 			},
 			() => {
 				this.calculateTotal()
-			}
+			},
 		)
 	}
 
@@ -106,12 +122,12 @@ class MyProvider extends Component {
 		this.setState(
 			() => {
 				return {
-					products: tempProducts
+					products: tempProducts,
 				}
 			},
 			() => {
 				this.calculateTotal()
-			}
+			},
 		)
 	}
 
@@ -124,12 +140,12 @@ class MyProvider extends Component {
 		this.setState(
 			() => {
 				return {
-					products: tempProducts
+					products: tempProducts,
 				}
 			},
 			() => {
 				this.calculateTotal()
-			}
+			},
 		)
 	}
 
@@ -154,12 +170,12 @@ class MyProvider extends Component {
 			() => {
 				return {
 					products: tempProducts,
-					cart: tempCart
+					cart: tempCart,
 				}
 			},
 			() => {
 				this.calculateTotal()
-			}
+			},
 		)
 	}
 
@@ -167,12 +183,12 @@ class MyProvider extends Component {
 		let totalToPay = 0
 		let totalInCart = 0
 		this.state.cart.map(
-			(item) => ((totalToPay = totalToPay + item.total), (totalInCart = totalInCart + item.count))
+			(item) => ((totalToPay = totalToPay + item.total), (totalInCart = totalInCart + item.count)),
 		)
 		this.setState(() => {
 			return {
 				cartTotalValue: totalToPay,
-				totalInCart
+				totalInCart,
 			}
 		})
 	}
@@ -187,7 +203,7 @@ class MyProvider extends Component {
 					increment: this.increment,
 					decrement: this.decrement,
 					removeItem: this.removeItem,
-					deepCopyProducts: this.deepCopyProducts
+					deepCopyProducts: this.deepCopyProducts,
 				}}
 			>
 				{this.props.children}
@@ -212,7 +228,7 @@ MyProvider = createFragmentContainer(MyProvider, {
 				}
 			}
 		}
-	`
+	`,
 })
 
 export { MyProvider }

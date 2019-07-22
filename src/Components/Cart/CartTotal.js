@@ -41,7 +41,14 @@ function CartTotal(props) {
 			>
 				Clear Cart
 			</Button>
-			<Button className={classes.buttonBuy} color="primary" variant="contained">
+			<Button
+				onClick={() => {
+					props.value.buyMutation()
+				}}
+				className={classes.buttonBuy}
+				color="primary"
+				variant="contained"
+			>
 				Buy it now
 			</Button>
 		</Grid>
