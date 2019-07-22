@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 00703da2f43515f25967f63422829084
+ * @relayHash 34f18fcd401f7e4eebead17388cbd7a7
  */
 
 /* eslint-disable */
@@ -41,6 +41,7 @@ fragment Context_productsConnection on ProductConnection {
       count
       company
       info
+      stock
     }
   }
 }
@@ -160,6 +161,13 @@ const node/*: ConcreteRequest*/ = {
                     "name": "info",
                     "args": null,
                     "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "stock",
+                    "args": null,
+                    "storageKey": null
                   }
                 ]
               }
@@ -173,7 +181,7 @@ const node/*: ConcreteRequest*/ = {
     "operationKind": "query",
     "name": "srcQuery",
     "id": null,
-    "text": "query srcQuery {\n  productsConnection {\n    ...Context_productsConnection\n  }\n}\n\nfragment Context_productsConnection on ProductConnection {\n  edges {\n    node {\n      id\n      title\n      img\n      price\n      subTotal\n      count\n      company\n      info\n    }\n  }\n}\n",
+    "text": "query srcQuery {\n  productsConnection {\n    ...Context_productsConnection\n  }\n}\n\nfragment Context_productsConnection on ProductConnection {\n  edges {\n    node {\n      id\n      title\n      img\n      price\n      subTotal\n      count\n      company\n      info\n      stock\n    }\n  }\n}\n",
     "metadata": {}
   }
 };

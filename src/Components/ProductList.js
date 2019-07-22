@@ -1,32 +1,32 @@
 /* this is the main page: Store. Where all the products are displayed */
 
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withWidth, IconButton, GridListTileBar, GridListTile, GridList, withStyles } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import { MyConsumer } from './../Context'
+import React from "react"
+import PropTypes from "prop-types"
+import { withWidth, IconButton, GridListTileBar, GridListTile, GridList, withStyles } from "@material-ui/core"
+import { Link } from "react-router-dom"
+import { MyConsumer } from "./../Context"
 
 const styles = (theme) => ({
 	root: {
-		display: 'flex',
-		flexWrap: 'wrap',
-		justifyContent: 'space-around',
-		overflow: 'hidden',
-		backgroundColor: theme.palette.background.paper
+		display: "flex",
+		flexWrap: "wrap",
+		justifyContent: "space-around",
+		overflow: "hidden",
+		backgroundColor: theme.palette.background.paper,
 	},
 	icon: {
-		color: 'white'
-	}
+		color: "white",
+	},
 })
 
 const SimpleProductList = (props) => {
 	const { classes } = props
 
 	const responsiveCols = () => {
-		if (props.width === 'sm') {
+		if (props.width === "sm") {
 			return 3
 		}
-		if (props.width === 'xs') {
+		if (props.width === "xs") {
 			return 1
 		}
 		return 4
@@ -54,6 +54,7 @@ const SimpleProductList = (props) => {
 										subtitle={<span>$: {tile.price}</span>}
 										actionIcon={
 											<IconButton
+												disabled={tile.count === tile.stock ? true : false}
 												onClick={() => {
 													value.addToCart(tile.id)
 												}}
@@ -74,7 +75,7 @@ const SimpleProductList = (props) => {
 }
 
 SimpleProductList.propTypes = {
-	classes: PropTypes.object.isRequired
+	classes: PropTypes.object.isRequired,
 }
 
 const SimpleProductListWithStyles = withStyles(styles)(SimpleProductList)

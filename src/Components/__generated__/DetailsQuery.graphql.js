@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 62da286fab151aaa0430bb6b8f6328c9
+ * @relayHash 4c9eb121024187fd5eb0d432bd16b8de
  */
 
 /* eslint-disable */
@@ -25,6 +25,7 @@ export type DetailsQueryResponse = {|
     +count: number,
     +company: string,
     +info: string,
+    +stock: number,
   |}
 |};
 export type DetailsQuery = {|
@@ -47,6 +48,7 @@ query DetailsQuery(
     count
     company
     info
+    stock
   }
 }
 */
@@ -131,6 +133,13 @@ v1 = [
         "name": "info",
         "args": null,
         "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "stock",
+        "args": null,
+        "storageKey": null
       }
     ]
   }
@@ -155,11 +164,11 @@ return {
     "operationKind": "query",
     "name": "DetailsQuery",
     "id": null,
-    "text": "query DetailsQuery(\n  $ID: ProductWhereUniqueInput!\n) {\n  product(where: $ID) {\n    id\n    title\n    img\n    price\n    subTotal\n    count\n    company\n    info\n  }\n}\n",
+    "text": "query DetailsQuery(\n  $ID: ProductWhereUniqueInput!\n) {\n  product(where: $ID) {\n    id\n    title\n    img\n    price\n    subTotal\n    count\n    company\n    info\n    stock\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '2535caef710376c2e1da4c9c81baa55a';
+(node/*: any*/).hash = '87b69ed6ea0c545a933afbf32a534350';
 module.exports = node;

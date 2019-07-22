@@ -1,32 +1,32 @@
 /* this page is shown when the user clicks the img of a product */
-import React from 'react'
-import { Grid, withStyles, Button, Icon } from '@material-ui/core'
-import { MyConsumer } from './../Context'
-import { Link } from 'react-router-dom'
+import React from "react"
+import { Grid, withStyles, Button, Icon } from "@material-ui/core"
+import { MyConsumer } from "./../Context"
+import { Link } from "react-router-dom"
 
 //relay imports:
-import graphql from 'babel-plugin-relay/macro'
-import { QueryRenderer } from 'react-relay'
-import environment from '../environment'
+import graphql from "babel-plugin-relay/macro"
+import { QueryRenderer } from "react-relay"
+import environment from "../environment"
 
 const styles = (theme) => ({
 	root: {
-		width: '70%',
-		margin: 'auto'
+		width: "70%",
+		margin: "auto",
 	},
 	img: {
-		maxWidth: '400px',
-		height: 'auto'
+		maxWidth: "400px",
+		height: "auto",
 	},
 	txt: {
-		textAlign: 'justify'
+		textAlign: "justify",
 	},
 	btn: {
-		margin: theme.spacing.unit
+		margin: theme.spacing.unit,
 	},
 	made: {
-		textTransform: 'uppercase'
-	}
+		textTransform: "uppercase",
+	},
 })
 
 const DetailsQuery = graphql`
@@ -40,6 +40,7 @@ const DetailsQuery = graphql`
 			count
 			company
 			info
+			stock
 		}
 	}
 `
@@ -80,7 +81,7 @@ const Details = (props) => {
 										<h2 className={classes.made}>MADE BY: {props.product.company}</h2>
 										<h3>Price: ${props.product.price}</h3>
 										<p>
-											{' '}
+											{" "}
 											<strong>Some Info About the Product: </strong>
 										</p>
 										<p>{props.product.info}</p>
@@ -89,6 +90,7 @@ const Details = (props) => {
 											Back to Store
 										</Button>
 										<Button
+											disabled={props.product.count === props.product.stock ? true : false}
 											onClick={() => {
 												value.addToCart(props.product.id)
 											}}
@@ -96,7 +98,7 @@ const Details = (props) => {
 											color="primary"
 											className={classes.btn}
 										>
-											{'Add to Cart'}
+											{"Add to Cart"}
 											<Icon>add_shopping_cart</Icon>
 										</Button>
 									</Grid>

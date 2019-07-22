@@ -22,6 +22,7 @@ export type Context_productsConnection = {|
       +count: number,
       +company: string,
       +info: string,
+      +stock: number,
     |}
   |}>,
   +$refType: Context_productsConnection$ref,
@@ -114,6 +115,13 @@ const node/*: ReaderFragment*/ = {
               "name": "info",
               "args": null,
               "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "stock",
+              "args": null,
+              "storageKey": null
             }
           ]
         }
@@ -122,5 +130,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '849550cf0dc816b62d04cdf4fb246d5c';
+(node/*: any*/).hash = 'cf8b060248767a2a641500791b90d75b';
 module.exports = node;

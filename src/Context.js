@@ -10,7 +10,8 @@ import { storeProducts } from "./data"
 
 //relay imports:
 import graphql from "babel-plugin-relay/macro"
-import { createFragmentContainer } from "react-relay"
+import { createFragmentContainer, commitMutation } from "react-relay"
+import environment from "./environment"
 
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
@@ -52,19 +53,35 @@ class MyProvider extends Component {
 	//The deepCopyProducts also does the reset in the cart and cartTotalValue states
 
 	buyMutation = () => {
-		const mutation = graphql`
-			mutation buyMutation($idArray: ProductWhereInput, $changedData: ProductUpdateManyMutationInput!) {
-				updateManyProducts(where: {id_in: $idArray}, data: $changedData) {
-					id
-					title
-					stock
+		this.state.cart.map((object) => {
+			const cartItemId = object.id
+			const cartItemNewStock = object.stock - object.count
+			let mutation = graphql`
+				mutation ContextMutation($ID: ProductWhereUniqueInput!, $changedData: ProductUpdateInput!) {
+					updateProduct(where: $ID, data: $changedData) {
+						id
+						title
+						stock
+					}
 				}
+			`
+			let variables = {
+				ID: { id: cartItemId },
+				changedData: { stock: cartItemNewStock },
 			}
-		`
-		const variables = {
-			idArray: this.state.cart.,
-			changedData: ,
-		}
+
+			commitMutation(environment, {
+				mutation,
+				variables,
+				onCompleted: (response, errors) => {
+					alert(
+						"Great!! We received your request in our database. Unfortunately this experience only emulates the purchase. Thank you for interacting with this web app.",
+					)
+				},
+				onError: (err) => console.error(err),
+			})
+		})
+		this.deepCopyProducts()
 	}
 
 	getItem = (id) => {
@@ -204,6 +221,7 @@ class MyProvider extends Component {
 					decrement: this.decrement,
 					removeItem: this.removeItem,
 					deepCopyProducts: this.deepCopyProducts,
+					buyMutation: this.buyMutation,
 				}}
 			>
 				{this.props.children}
@@ -225,6 +243,7 @@ MyProvider = createFragmentContainer(MyProvider, {
 					count
 					company
 					info
+					stock
 				}
 			}
 		}
