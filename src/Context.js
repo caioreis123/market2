@@ -6,7 +6,6 @@ In this page we define all the functions as the only state of the whole app.
 Both the state and the functions are going be passed using the context API imported in the index.js file */
 
 import React, { Component } from "react"
-import { storeProducts } from "./data"
 
 //relay imports:
 import graphql from "babel-plugin-relay/macro"

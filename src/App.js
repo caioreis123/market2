@@ -1,16 +1,12 @@
 /* The App.js is the second file in the hierarchy because is child of the Index.js which adds the Context and the Router API.
 The App.js will define the 3 different pages of the app: home, details and store */
 
-import React, { Component } from 'react'
-import './App.css'
-import { Switch, Route } from 'react-router-dom'
-import Navbar from './Components/Navbar'
-import Cart from './Components/Cart/Cart'
-
-// import Cart from './Components/ProductList'
-// import Default from './Components/Default'
-import Details from './Components/Details'
-import ProductList from './Components/ProductList'
+import React, { Component } from "react"
+import { Switch, Route } from "react-router-dom"
+import Navbar from "./Components/Navbar"
+import Cart from "./Components/Cart/Cart"
+import Details from "./Components/Details"
+import ProductList from "./Components/ProductList"
 
 class App extends Component {
 	render() {

@@ -1,8 +1,8 @@
-/* this page is shown when the user clicks the img of a product */
+/* this page is shown when the user clicks at the img of a product */
 import React from "react"
-import { Grid, withStyles, Button, Icon } from "@material-ui/core"
 import { MyConsumer } from "./../Context"
 import { Link } from "react-router-dom"
+import { Grid, withStyles, Button, Icon } from "@material-ui/core"
 
 const styles = (theme) => ({
 	root: {
@@ -66,7 +66,7 @@ const Details = (props) => {
 								color="primary"
 								className={classes.btn}
 							>
-								{"Add to Cart"}
+								{count === stock ? "Sold out" : "Add to Cart"}
 								<Icon>add_shopping_cart</Icon>
 							</Button>
 						</Grid>
@@ -77,24 +77,4 @@ const Details = (props) => {
 	)
 }
 
-/* const Details = createFragmentContainer(SimpleDetails, {
-  product: graphql`
-    fragment Details_product on Product {
-      id
-      title
-      img
-      price
-      subTotal
-      count
-      company
-      info
-    }
-  `
-}) */
-
 export default withStyles(styles)(Details)
-
-//export default withStyles(styles)(Details);
-
-//export default withStyles(styles)(createFragmentContainer(Details, DetailsFragment)(Details));
-//export default createFragmentContainer(Details, DetailsFragment)(withStyles(styles)(Details))

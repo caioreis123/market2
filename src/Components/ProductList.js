@@ -1,4 +1,4 @@
-/* this is the main page: Store. Where all the products are displayed */
+/* this is the Store main page. Where all the products are displayed */
 
 import React from "react"
 import PropTypes from "prop-types"
@@ -83,27 +83,3 @@ const SimpleProductListWithStylesWithWidth = withWidth()(SimpleProductListWithSt
 const ProductList = SimpleProductListWithStylesWithWidth
 
 export default ProductList
-
-/* const ProductList = createFragmentContainer(SimpleProductListWithStylesWithWidth, {
-    products: graphql`
-        fragment ProductList_products on Product{
-            id
-            title
-            img
-            price
-            subTotal
-            count
-            company
-            info
-        }
-    `
-}) */
-
-//export default withStyles(styles)(ProductList);
-
-/* export default compose(
-    withStyles(styles, {
-        name: 'ProductList',
-    }),
-    withWidth(),
-)(ProductList); */

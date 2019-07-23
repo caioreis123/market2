@@ -1,34 +1,24 @@
 import React from "react"
-import { withStyles } from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
-import { Typography, Grid } from "@material-ui/core"
+import { Typography, Grid, Button, withStyles } from "@material-ui/core"
 
 const styles = (theme) => ({
 	root: {
 		flexGrow: 1,
 		paddingRight: "5rem",
-		//justifyContent: "spaceBetween",
-	},
-	total: {
-		//float: "center",
 	},
 	buttonClear: {
-		//display: "inlineFlex",
-		//marginLeft: "auto",
-		//float: "left",
+		margin: "15px",
 	},
 	buttonBuy: {
-		//display: "inlineBlock",
 		padding: "6px 18px",
-		//float: "right",
 	},
 })
 
 function CartTotal(props) {
 	const { classes } = props
 	return (
-		<Grid container direction="column" justify="space-evenly" alignItems="flex-end" className={classes.root}>
-			<Typography className={classes.total} align="center" variant="h5">
+		<Grid container direction="column" justify="space-evenly" alignItems="center" className={classes.root}>
+			<Typography align="center" variant="h5">
 				Total: ${props.value.cartTotalValue}
 			</Typography>
 			<Button

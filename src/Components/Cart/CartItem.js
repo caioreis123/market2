@@ -2,40 +2,26 @@
 a picture, a subtotal display. */
 import React from "react"
 import PropTypes from "prop-types"
-import { withStyles } from "@material-ui/core/styles"
-import Card from "@material-ui/core/Card"
-import CardContent from "@material-ui/core/CardContent"
-import CardMedia from "@material-ui/core/CardMedia"
-import IconButton from "@material-ui/core/IconButton"
-import Typography from "@material-ui/core/Typography"
+import { withStyles, Card, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core"
 import compose from "recompose/compose"
 
 const styles = (theme) => ({
 	card: {
 		display: "flex",
-	},
-	detailsProduct: {
-		// display: 'flex',
-		// flexDirection: 'column',
+		marginBottom: theme.spacing.unit * 2,
 	},
 	detailsQuantity: {
-		// display: 'flex',
 		marginLeft: "auto",
 	},
-	column: {
-		// flex: '1 0 auto',
-	},
-	columnQuantity: {},
 	img: {
 		width: "auto",
 		height: 200,
 		paddingLeft: "10rem",
+		marginLeft: theme.spacing.unit * 5,
 	},
 	quantity: {
 		display: "flex",
 		alignItems: "center",
-		paddingRight: theme.spacing.unit,
-		paddingBottom: theme.spacing.unit,
 	},
 })
 
@@ -47,8 +33,8 @@ function CartItem(props) {
 	return (
 		<Card className={classes.card}>
 			<CardMedia className={classes.img} image={img} title="Product" />
-			<div className={classes.detailsProduct}>
-				<CardContent className={classes.column}>
+			<div>
+				<CardContent>
 					<Typography component="h5" variant="h5">
 						{title}
 					</Typography>
@@ -62,7 +48,7 @@ function CartItem(props) {
 			</div>
 
 			<div className={classes.detailsQuantity}>
-				<CardContent className={classes.columnQuantity}>
+				<CardContent>
 					<div className={classes.quantity}>
 						<Typography variant="subtitle1">Quantity:</Typography>
 						<IconButton
@@ -107,8 +93,6 @@ CartItem.propTypes = {
 	classes: PropTypes.object.isRequired,
 	theme: PropTypes.object.isRequired,
 }
-
-//export default withStyles(styles, { withTheme: true })(CardItem);
 
 export default compose(
 	withStyles(styles, {
