@@ -11,6 +11,7 @@ const styles = (theme) => ({
 	},
 	buttonBuy: {
 		padding: "6px 18px",
+		marginBottom: "30px",
 	},
 })
 
