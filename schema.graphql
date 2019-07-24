@@ -1,0 +1,516 @@
+type AggregateProduct {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createProduct(data: ProductCreateInput!): Product!
+  updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
+  deleteProduct(where: ProductWhereUniqueInput!): Product
+  upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
+  updateManyProducts(data: ProductUpdateManyMutationInput!, where: ProductWhereInput): BatchPayload!
+  deleteManyProducts(where: ProductWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Product implements Node {
+  id: ID!
+  title: String!
+  img: String!
+  company: String!
+  info: String!
+  price: Float!
+  subTotal: Float!
+  count: Int!
+  stock: Int!
+  inCart: Boolean!
+}
+
+"""A connection to a list of items."""
+type ProductConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ProductEdge]!
+  aggregate: AggregateProduct!
+}
+
+input ProductCreateInput {
+  id: ID
+  title: String!
+  img: String!
+  company: String!
+  info: String!
+  price: Float!
+  subTotal: Float!
+  count: Int!
+  stock: Int!
+  inCart: Boolean!
+}
+
+"""An edge in a connection."""
+type ProductEdge {
+  """The item at the end of the edge."""
+  node: Product!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ProductOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  img_ASC
+  img_DESC
+  company_ASC
+  company_DESC
+  info_ASC
+  info_DESC
+  price_ASC
+  price_DESC
+  subTotal_ASC
+  subTotal_DESC
+  count_ASC
+  count_DESC
+  stock_ASC
+  stock_DESC
+  inCart_ASC
+  inCart_DESC
+}
+
+type ProductPreviousValues {
+  id: ID!
+  title: String!
+  img: String!
+  company: String!
+  info: String!
+  price: Float!
+  subTotal: Float!
+  count: Int!
+  stock: Int!
+  inCart: Boolean!
+}
+
+type ProductSubscriptionPayload {
+  mutation: MutationType!
+  node: Product
+  updatedFields: [String!]
+  previousValues: ProductPreviousValues
+}
+
+input ProductSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProductSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProductSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProductSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ProductWhereInput
+}
+
+input ProductUpdateInput {
+  title: String
+  img: String
+  company: String
+  info: String
+  price: Float
+  subTotal: Float
+  count: Int
+  stock: Int
+  inCart: Boolean
+}
+
+input ProductUpdateManyMutationInput {
+  title: String
+  img: String
+  company: String
+  info: String
+  price: Float
+  subTotal: Float
+  count: Int
+  stock: Int
+  inCart: Boolean
+}
+
+input ProductWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProductWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProductWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProductWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  img: String
+
+  """All values that are not equal to given value."""
+  img_not: String
+
+  """All values that are contained in given list."""
+  img_in: [String!]
+
+  """All values that are not contained in given list."""
+  img_not_in: [String!]
+
+  """All values less than the given value."""
+  img_lt: String
+
+  """All values less than or equal the given value."""
+  img_lte: String
+
+  """All values greater than the given value."""
+  img_gt: String
+
+  """All values greater than or equal the given value."""
+  img_gte: String
+
+  """All values containing the given string."""
+  img_contains: String
+
+  """All values not containing the given string."""
+  img_not_contains: String
+
+  """All values starting with the given string."""
+  img_starts_with: String
+
+  """All values not starting with the given string."""
+  img_not_starts_with: String
+
+  """All values ending with the given string."""
+  img_ends_with: String
+
+  """All values not ending with the given string."""
+  img_not_ends_with: String
+  company: String
+
+  """All values that are not equal to given value."""
+  company_not: String
+
+  """All values that are contained in given list."""
+  company_in: [String!]
+
+  """All values that are not contained in given list."""
+  company_not_in: [String!]
+
+  """All values less than the given value."""
+  company_lt: String
+
+  """All values less than or equal the given value."""
+  company_lte: String
+
+  """All values greater than the given value."""
+  company_gt: String
+
+  """All values greater than or equal the given value."""
+  company_gte: String
+
+  """All values containing the given string."""
+  company_contains: String
+
+  """All values not containing the given string."""
+  company_not_contains: String
+
+  """All values starting with the given string."""
+  company_starts_with: String
+
+  """All values not starting with the given string."""
+  company_not_starts_with: String
+
+  """All values ending with the given string."""
+  company_ends_with: String
+
+  """All values not ending with the given string."""
+  company_not_ends_with: String
+  info: String
+
+  """All values that are not equal to given value."""
+  info_not: String
+
+  """All values that are contained in given list."""
+  info_in: [String!]
+
+  """All values that are not contained in given list."""
+  info_not_in: [String!]
+
+  """All values less than the given value."""
+  info_lt: String
+
+  """All values less than or equal the given value."""
+  info_lte: String
+
+  """All values greater than the given value."""
+  info_gt: String
+
+  """All values greater than or equal the given value."""
+  info_gte: String
+
+  """All values containing the given string."""
+  info_contains: String
+
+  """All values not containing the given string."""
+  info_not_contains: String
+
+  """All values starting with the given string."""
+  info_starts_with: String
+
+  """All values not starting with the given string."""
+  info_not_starts_with: String
+
+  """All values ending with the given string."""
+  info_ends_with: String
+
+  """All values not ending with the given string."""
+  info_not_ends_with: String
+  price: Float
+
+  """All values that are not equal to given value."""
+  price_not: Float
+
+  """All values that are contained in given list."""
+  price_in: [Float!]
+
+  """All values that are not contained in given list."""
+  price_not_in: [Float!]
+
+  """All values less than the given value."""
+  price_lt: Float
+
+  """All values less than or equal the given value."""
+  price_lte: Float
+
+  """All values greater than the given value."""
+  price_gt: Float
+
+  """All values greater than or equal the given value."""
+  price_gte: Float
+  subTotal: Float
+
+  """All values that are not equal to given value."""
+  subTotal_not: Float
+
+  """All values that are contained in given list."""
+  subTotal_in: [Float!]
+
+  """All values that are not contained in given list."""
+  subTotal_not_in: [Float!]
+
+  """All values less than the given value."""
+  subTotal_lt: Float
+
+  """All values less than or equal the given value."""
+  subTotal_lte: Float
+
+  """All values greater than the given value."""
+  subTotal_gt: Float
+
+  """All values greater than or equal the given value."""
+  subTotal_gte: Float
+  count: Int
+
+  """All values that are not equal to given value."""
+  count_not: Int
+
+  """All values that are contained in given list."""
+  count_in: [Int!]
+
+  """All values that are not contained in given list."""
+  count_not_in: [Int!]
+
+  """All values less than the given value."""
+  count_lt: Int
+
+  """All values less than or equal the given value."""
+  count_lte: Int
+
+  """All values greater than the given value."""
+  count_gt: Int
+
+  """All values greater than or equal the given value."""
+  count_gte: Int
+  stock: Int
+
+  """All values that are not equal to given value."""
+  stock_not: Int
+
+  """All values that are contained in given list."""
+  stock_in: [Int!]
+
+  """All values that are not contained in given list."""
+  stock_not_in: [Int!]
+
+  """All values less than the given value."""
+  stock_lt: Int
+
+  """All values less than or equal the given value."""
+  stock_lte: Int
+
+  """All values greater than the given value."""
+  stock_gt: Int
+
+  """All values greater than or equal the given value."""
+  stock_gte: Int
+  inCart: Boolean
+
+  """All values that are not equal to given value."""
+  inCart_not: Boolean
+}
+
+input ProductWhereUniqueInput {
+  id: ID
+}
+
+type Query {
+  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
+  product(where: ProductWhereUniqueInput!): Product
+  productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Subscription {
+  product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
+}
+

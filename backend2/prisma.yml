@@ -1,0 +1,13 @@
+endpoint: https://us1.prisma.sh/caio-reis-372c29/backend2/dev
+# this endpoint gives ther graphQL server API access to the prisma database
+# if you put a _admin at the end of this url you are going to be redirected to the prisma database manage system
+
+datamodel: datamodel.prisma
+
+generate:
+  - generator: javascript-client
+    output: ./generated/prisma-client/
+
+hooks:
+  post-deploy:
+    - prisma generate
