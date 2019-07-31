@@ -2,19 +2,32 @@
 a picture, a subtotal display. */
 import React from "react"
 import PropTypes from "prop-types"
-import { withStyles, Card, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core"
+import { withWidth, withStyles, Card, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core"
 import compose from "recompose/compose"
 
 const styles = (theme) => ({
 	card: {
 		display: "flex",
+		[theme.breakpoints.down("xs")]: {
+			display: "inline",
+		},
+
 		marginBottom: theme.spacing.unit * 2,
+	},
+	cardInfo: {
+		paddingBottom: "0px !important",
+	},
+	cardQtd: {
+		paddingTop: "0px !important",
 	},
 	detailsQuantity: {
 		marginLeft: "auto",
 	},
 	img: {
 		width: "auto",
+		[theme.breakpoints.down("sm")]: {
+			width: 70,
+		},
 		height: 200,
 		paddingLeft: "10rem",
 		marginLeft: theme.spacing.unit * 5,
@@ -26,29 +39,27 @@ const styles = (theme) => ({
 })
 
 function CartItem(props) {
-	const { classes, theme } = props
-	const { id, title, img, price, total, count, company, stock } = props.individualProduct
+	const { classes } = props
+	const { id, title, img, price, count, company, stock } = props.individualProduct
 	const { increment, decrement, removeItem } = props.value
 
 	return (
 		<Card className={classes.card}>
 			<CardMedia className={classes.img} image={img} title="Product" />
 			<div>
-				<CardContent>
+				<CardContent className={classes.cardInfo}>
 					<Typography component="h5" variant="h5">
 						{title}
 					</Typography>
-
 					<Typography style={{ textTransform: "uppercase" }} variant="body2" color="textSecondary">
 						By {company}
 					</Typography>
-
 					<Typography variant="subtitle1">${price}</Typography>
 				</CardContent>
 			</div>
 
 			<div className={classes.detailsQuantity}>
-				<CardContent>
+				<CardContent className={classes.cardQtd}>
 					<div className={classes.quantity}>
 						<Typography variant="subtitle1">Quantity:</Typography>
 						<IconButton
