@@ -2,7 +2,7 @@
 a picture, a subtotal display. */
 import React from "react"
 import PropTypes from "prop-types"
-import { withWidth, withStyles, Card, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core"
+import { withStyles, Card, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core"
 import compose from "recompose/compose"
 
 const styles = (theme) => ({
