@@ -18,7 +18,11 @@ const styles = (theme) => ({
 		paddingBottom: "0px !important",
 	},
 	cardQtd: {
-		paddingTop: "0px !important",
+		paddingTop: "16px",
+		[theme.breakpoints.down("xs")]: {
+			paddingTop: "0px !important",
+			borderBottom: " 2px solid #ccc",
+		},
 	},
 	detailsQuantity: {
 		marginLeft: "auto",
@@ -44,59 +48,61 @@ function CartItem(props) {
 	const { increment, decrement, removeItem } = props.value
 
 	return (
-		<Card className={classes.card}>
-			<CardMedia className={classes.img} image={img} title="Product" />
-			<div>
-				<CardContent className={classes.cardInfo}>
-					<Typography component="h5" variant="h5">
-						{title}
-					</Typography>
-					<Typography style={{ textTransform: "uppercase" }} variant="body2" color="textSecondary">
-						By {company}
-					</Typography>
-					<Typography variant="subtitle1">${price}</Typography>
-				</CardContent>
-			</div>
+		<React.Fragment>
+			<Card className={classes.card}>
+				<CardMedia className={classes.img} image={img} title="Product" />
+				<div>
+					<CardContent className={classes.cardInfo}>
+						<Typography component="h5" variant="h5">
+							{title}
+						</Typography>
+						<Typography style={{ textTransform: "uppercase" }} variant="body2" color="textSecondary">
+							By {company}
+						</Typography>
+						<Typography variant="subtitle1">${price}</Typography>
+					</CardContent>
+				</div>
 
-			<div className={classes.detailsQuantity}>
-				<CardContent className={classes.cardQtd}>
-					<div className={classes.quantity}>
-						<Typography variant="subtitle1">Quantity:</Typography>
+				<div className={classes.detailsQuantity}>
+					<CardContent className={classes.cardQtd}>
+						<div className={classes.quantity}>
+							<Typography variant="subtitle1">Quantity:</Typography>
+							<IconButton
+								onClick={() => {
+									decrement(id)
+								}}
+								aria-label="Decrement"
+								disabled={count === 1 ? true : false}
+							>
+								<i class="material-icons">remove_circle_outline</i>
+							</IconButton>
+
+							{count}
+
+							<IconButton
+								disabled={count === stock ? true : false}
+								onClick={() => {
+									increment(id)
+								}}
+								aria-label="Increment"
+							>
+								<i class="material-icons">add_circle_outline</i>
+							</IconButton>
+						</div>
+						<Typography variant="subtitle1">Subtotal: ${count * price}</Typography>
+						Remove Item
 						<IconButton
 							onClick={() => {
-								decrement(id)
+								removeItem(id)
 							}}
-							aria-label="Decrement"
-							disabled={count === 1 ? true : false}
+							aria-label="Remove"
 						>
-							<i class="material-icons">remove_circle_outline</i>
+							<i class="material-icons">delete</i>
 						</IconButton>
-
-						{count}
-
-						<IconButton
-							disabled={count === stock ? true : false}
-							onClick={() => {
-								increment(id)
-							}}
-							aria-label="Increment"
-						>
-							<i class="material-icons">add_circle_outline</i>
-						</IconButton>
-					</div>
-					<Typography variant="subtitle1">Subtotal: ${count * price}</Typography>
-					Remove Item
-					<IconButton
-						onClick={() => {
-							removeItem(id)
-						}}
-						aria-label="Remove"
-					>
-						<i class="material-icons">delete</i>
-					</IconButton>
-				</CardContent>
-			</div>
-		</Card>
+					</CardContent>
+				</div>
+			</Card>
+		</React.Fragment>
 	)
 }
 
