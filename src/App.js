@@ -1,5 +1,9 @@
-/* The App.js is the second file in the hierarchy because is child of the Index.js which adds the Context and the Router API.
-The App.js will define the 3 different pages of the app: home, details and store */
+/* 
+1) index.js
+2) App.js
+3) Context.js
+The App.js will define the 3 different pages of the app: home, details and store 
+*/
 
 import React, { Component } from "react"
 import { Switch, Route } from "react-router-dom"
