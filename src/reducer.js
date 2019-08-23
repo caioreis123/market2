@@ -1,4 +1,10 @@
-import { INCREMENT_CART_ITEM_QUANTITY, DECREMENT_CART_ITEM_QUANTITY, ADD_PRODUCT_TO_CART } from "./actionsAndConstants"
+import {
+	INCREMENT_CART_ITEM_QUANTITY,
+	DECREMENT_CART_ITEM_QUANTITY,
+	ADD_PRODUCT_TO_CART,
+	REMOVE_PRODUCT_FROM_CART,
+	CLEAR_CART,
+} from "./actionsAndConstants"
 
 const initialState = {
 	cart: [],
@@ -38,6 +44,7 @@ const reducer = (state = initialState, action) => {
 				...updatedCart[itemIndex],
 			}
 			decrementedItem.count--
+			decrementedItem.total = decrementedItem.count * decrementedItem.price
 			updatedCart[itemIndex] = decrementedItem
 
 			newQuantitiesInCart = state.quantitiesInCart - 1
@@ -58,6 +65,8 @@ const reducer = (state = initialState, action) => {
 				...updatedCart[itemIndex],
 			}
 			incrementedItem.count++
+			incrementedItem.total = incrementedItem.count * incrementedItem.price
+
 			updatedCart[itemIndex] = incrementedItem
 
 			newQuantitiesInCart = state.quantitiesInCart + 1
@@ -70,10 +79,41 @@ const reducer = (state = initialState, action) => {
 				cartTotalPrice: newCartTotalPrice,
 				quantitiesInCart: newQuantitiesInCart,
 			}
+
+		case REMOVE_PRODUCT_FROM_CART:
+			updatedCart = [ ...state.cart ]
+			itemIndex = updatedCart.indexOf(action.payload)
+			product = updatedCart[itemIndex]
+			updatedCart.splice(itemIndex, 1)
+
+			newQuantitiesInCart = state.quantitiesInCart - product.count
+
+			newCartTotalPrice = state.cartTotalPrice - product.total
+
+			product.total = 0
+			product.count = 0
+
+			return {
+				...state,
+				cart: updatedCart,
+				cartTotalPrice: newCartTotalPrice,
+				quantitiesInCart: newQuantitiesInCart,
+			}
+
+		case CLEAR_CART:
+			updatedCart = []
+			newCartTotalPrice = 0
+			newQuantitiesInCart = 0
+			return {
+				...state,
+				cart: updatedCart,
+				cartTotalPrice: newCartTotalPrice,
+				quantitiesInCart: newQuantitiesInCart,
+			}
+
 		default:
 			return state
 	}
 }
 
 export default reducer
-//it is a pure function because it returns an object

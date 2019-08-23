@@ -5,7 +5,7 @@ import { withStyles, Card, CardContent, CardMedia, IconButton, Typography } from
 
 //redux imports:
 import { connect } from "react-redux"
-import { incrementCartItemQuantity, decrementCartItemQuantity } from "../../actionsAndConstants"
+import { incrementCartItemQuantity, decrementCartItemQuantity, removeProductFromCart } from "../../actionsAndConstants"
 
 const styles = (theme) => ({
 	card: {
@@ -46,8 +46,7 @@ const styles = (theme) => ({
 
 function CartItem(props) {
 	const { classes } = props
-	const { id, title, img, price, count, company, stock } = props.individualProduct
-	//const { increment, decrement, removeItem } = props.value
+	const { title, img, price, count, company, stock } = props.individualProduct
 
 	return (
 		<React.Fragment>
@@ -72,7 +71,6 @@ function CartItem(props) {
 							<IconButton
 								onClick={() => {
 									props.dispatch(decrementCartItemQuantity(props.individualProduct))
-									//decrement(id)
 								}}
 								aria-label="Decrement"
 								disabled={count === 1 ? true : false}
@@ -86,7 +84,6 @@ function CartItem(props) {
 								disabled={count === stock ? true : false}
 								onClick={() => {
 									props.dispatch(incrementCartItemQuantity(props.individualProduct))
-									//increment(id)
 								}}
 								aria-label="Increment"
 							>
@@ -97,7 +94,7 @@ function CartItem(props) {
 						Remove Item
 						<IconButton
 							onClick={() => {
-								//removeItem(id)
+								props.dispatch(removeProductFromCart(props.individualProduct))
 							}}
 							aria-label="Remove"
 						>
@@ -110,16 +107,4 @@ function CartItem(props) {
 	)
 }
 
-// const mapStateToProps = (state) => {
-// 	return {
-// 		cart: state.cart,
-// 		cartTotalValue: state.cartTotalValue,
-// 		totalInCart: state.totalInCart,
-// 	}
-// }
-
-//export default withStyles(styles)(CartItem)
-
 export default connect()(withStyles(styles)(CartItem))
-
-//export default withStyles(styles)(connect(mapStateToProps)(CartItem))

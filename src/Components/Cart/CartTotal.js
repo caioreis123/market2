@@ -1,6 +1,10 @@
 import React from "react"
 import { Typography, Grid, Button, withStyles } from "@material-ui/core"
 
+//redux imports:
+import { connect } from "react-redux"
+import { clearCart } from "../../actionsAndConstants"
+
 const styles = (theme) => ({
 	root: {
 		flexGrow: 1,
@@ -20,12 +24,12 @@ function CartTotal(props) {
 	return (
 		<Grid container direction="column" justify="space-evenly" alignItems="center" className={classes.root}>
 			<Typography align="center" variant="h5">
-				Total: ${props.value.cartTotalValue}
+				Total: ${props.cartTotalPrice}
 			</Typography>
 			<Button
 				className={classes.buttonClear}
 				onClick={() => {
-					props.value.deepCopyProducts()
+					props.dispatch(clearCart())
 				}}
 				variant="contained"
 				color="secondary"
@@ -46,4 +50,10 @@ function CartTotal(props) {
 	)
 }
 
-export default withStyles(styles)(CartTotal)
+const mapStateToProps = (state) => {
+	return {
+		cartTotalPrice: state.cartTotalPrice,
+	}
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(CartTotal))

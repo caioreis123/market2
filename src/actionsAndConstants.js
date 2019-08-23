@@ -9,6 +9,14 @@ export function addProductToCart(product) {
 	}
 }
 
+export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART"
+export function removeProductFromCart(product) {
+	return {
+		type: REMOVE_PRODUCT_FROM_CART,
+		payload: product,
+	}
+}
+
 export const INCREMENT_CART_ITEM_QUANTITY = "INCREMENT_CART_ITEM_QUANTITY"
 export function incrementCartItemQuantity(product) {
 	return {
@@ -21,5 +29,11 @@ export function decrementCartItemQuantity(product) {
 	return {
 		type: DECREMENT_CART_ITEM_QUANTITY,
 		payload: product,
+	}
+}
+export const CLEAR_CART = "CLEAR_CART"
+export function clearCart() {
+	return {
+		type: CLEAR_CART,
 	}
 }
