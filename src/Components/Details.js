@@ -9,6 +9,10 @@ import graphql from "babel-plugin-relay/macro"
 import { QueryRenderer } from "react-relay"
 import environment from "../environment"
 
+//redux imports:
+import { connect } from "react-redux"
+import { addProductToCart } from "../actionsAndConstants"
+
 const styles = (theme) => ({
 	root: {
 		width: "70%",
@@ -29,87 +33,75 @@ const styles = (theme) => ({
 	},
 })
 
-const DetailsQuery = graphql`
-	query DetailsQuery($ID: ProductWhereUniqueInput!) {
-		product(where: $ID) {
-			id
-			title
-			img
-			price
-			subTotal
-			count
-			company
-			info
-			stock
-		}
-	}
-`
+// const DetailsQuery = graphql`
+// 	query DetailsQuery($ID: ProductWhereUniqueInput!) {
+// 		product(where: $ID) {
+// 			id
+// 			title
+// 			img
+// 			price
+// 			subTotal
+// 			count
+// 			company
+// 			info
+// 			stock
+// 		}
+// 	}
+// `
 
 const Details = (props) => {
-	const { classes, match } = props
-	const id = match.params.id
+	const { classes } = props
 	return (
-		<QueryRenderer
-			environment={environment}
-			query={DetailsQuery}
-			variables={{ ID: { id } }}
-			render={({ error, props }) => {
-				if (error) {
-					return <div>{error.message}</div>
-				} else if (!props) {
-					return <div>Loading...</div>
-				}
+		<MyConsumer>
+			{(value) => {
+				const { id, company, img, info, price, title, count, stock } = value.detailProduct
 				return (
-					<MyConsumer>
-						{(value) => {
-							return (
-								<Grid
-									container
-									direction="row"
-									align="center"
-									alignItems="center"
-									justify="center"
-									className={classes.root}
-								>
-									<Grid item xs={12}>
-										<h1>{props.product.title}</h1>
-									</Grid>
-									<Grid item xs={6} className={classes.img}>
-										<img src={props.product.img} alt="product" />
-									</Grid>
-									<Grid item xs={6} className={classes.txt} justify="flex-start">
-										<h2 className={classes.made}>MADE BY: {props.product.company}</h2>
-										<h3>Price: ${props.product.price}</h3>
-										<p>
-											{" "}
-											<strong>Some Info About the Product: </strong>
-										</p>
-										<p>{props.product.info}</p>
-										<Button component={Link} to="/" variant="contained" className={classes.btn}>
-											<Icon>keyboard_backspace</Icon>
-											Back to Store
-										</Button>
-										<Button
-											disabled={props.product.count === props.product.stock ? true : false}
-											onClick={() => {
-												value.addToCart(props.product.id)
-											}}
-											variant="contained"
-											color="primary"
-											className={classes.btn}
-										>
-											{props.product.count === props.product.stock ? "Sold out" : "Add to Cart"}
-											<Icon>add_shopping_cart</Icon>
-										</Button>
-									</Grid>
-								</Grid>
-							)
-						}}
-					</MyConsumer>
+					<Grid
+						container
+						direction="row"
+						align="center"
+						alignItems="center"
+						justify="center"
+						className={classes.root}
+					>
+						<Grid item xs={12}>
+							<h1>{title}</h1>
+						</Grid>
+						<Grid item xs={6} className={classes.img}>
+							<img src={img} alt="product" />
+						</Grid>
+						<Grid item xs={6} className={classes.txt} justify="flex-start">
+							<h2 className={classes.made}>MADE BY: {company}</h2>
+							<h3>Price: ${price}</h3>
+							<p>
+								{" "}
+								<strong>Some Info About the Product: </strong>
+							</p>
+							<p>{info}</p>
+							<Button component={Link} to="/" variant="contained" className={classes.btn}>
+								<Icon>keyboard_backspace</Icon>
+								Back to Store
+							</Button>
+							<Button
+								disabled={count === stock ? true : false}
+								onClick={() => {
+									props.dispatch(addProductToCart(value.detailProduct))
+								}}
+								variant="contained"
+								color="primary"
+								className={classes.btn}
+							>
+								{count === stock ? "Sold out" : "Add to Cart"}
+								<Icon>add_shopping_cart</Icon>
+							</Button>
+						</Grid>
+					</Grid>
 				)
 			}}
-		/>
+		</MyConsumer>
 	)
 }
 
-export default withStyles(styles)(Details)
+export default connect()(withStyles(styles)(Details))
+
+//export default connect()(withStyles(styles)(Details))

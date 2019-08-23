@@ -18,6 +18,7 @@ const reducer = (state = initialState, action) => {
 	let newQuantitiesInCart
 	let product
 	let itemIndex
+	let cart
 
 	switch (action.type) {
 		case ADD_PRODUCT_TO_CART:
@@ -30,6 +31,7 @@ const reducer = (state = initialState, action) => {
 			newQuantitiesInCart = state.quantitiesInCart + 1
 
 			newCartTotalPrice = state.cartTotalPrice + product.price
+
 			return {
 				...state,
 				cart: updatedCart,

@@ -5,10 +5,10 @@ import PropTypes from "prop-types"
 import { withWidth, IconButton, GridListTileBar, GridListTile, GridList, withStyles } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { MyConsumer } from "./../Context"
-import { addProductToCart } from "../actionsAndConstants"
 
 //redux imports:
 import { connect } from "react-redux"
+import { addProductToCart } from "../actionsAndConstants"
 
 const styles = (theme) => ({
 	root: {
@@ -50,7 +50,7 @@ const SimpleProductList = (props) => {
 											alt={tile.title}
 											width="250"
 											height="250"
-											onClick={() => value.handleDetail(tile.id)}
+											onClick={() => value.handleDetail(tile)}
 										/>
 									</Link>
 									<GridListTileBar

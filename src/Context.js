@@ -89,8 +89,8 @@ class ContextProvider extends Component {
 	}
 	/* this function returns the product with the id passed to it as argument */
 
-	handleDetail = (id) => {
-		const product = this.getItem(id)
+	handleDetail = (item) => {
+		const product = item
 		this.setState(() => {
 			return {
 				detailProduct: product,
@@ -175,7 +175,7 @@ class ContextProvider extends Component {
 		product.count = 0
 		//will reset this 3 values of the removed product
 		//so when the user adds it again it does not mess up our total value of the cart and
-		// our counter of the amout of product while enabling back the add to cart button
+		// our counter of the amount of product while enabling back the add to cart button
 
 		let tempCart = [ ...this.state.cart ]
 		const indexOfCartItem = tempCart.indexOf(product)
