@@ -5,7 +5,9 @@ import PropTypes from "prop-types"
 import { withStyles, Card, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core"
 import compose from "recompose/compose"
 
+//redux imports:
 import { connect } from "react-redux"
+import { incrementCartItemQuantity } from "../../actionsAndConstants"
 
 const styles = (theme) => ({
 	card: {
@@ -79,11 +81,12 @@ function CartItem(props) {
 								<i class="material-icons">remove_circle_outline</i>
 							</IconButton>
 
-							{props.cartTotalValue}
+							{count}
 
 							<IconButton
 								disabled={count === stock ? true : false}
 								onClick={() => {
+									props.dispatch(incrementCartItemQuantity(id))
 									//increment(id)
 								}}
 								aria-label="Increment"
@@ -121,8 +124,8 @@ CartItem.propTypes = {
 // 	}
 // }
 
-export default withStyles(styles)(CartItem)
+//export default withStyles(styles)(CartItem)
 
-//export default connect(mapStateToProps)(withStyles(styles)(CartItem))
+export default connect()(withStyles(styles)(CartItem))
 
 //export default withStyles(styles)(connect(mapStateToProps)(CartItem))
