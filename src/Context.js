@@ -1,9 +1,9 @@
 /*
 1)index.js
-2)App.js
-3)Context.js
+2)Context.js
+3)App.js
 In this page we define all the functions as the only state of the whole app. 
-Both the state and the functions are going be passed using the context API imported in the index.js file */
+Both the state and the functions are going to be passed using the context API imported in the index.js file */
 
 import React, { Component } from "react"
 
@@ -15,7 +15,7 @@ import environment from "./environment"
 const MyContext = React.createContext()
 export const MyConsumer = MyContext.Consumer
 
-class MyProvider extends Component {
+class ContextProvider extends Component {
 	state = {
 		products: [] /* all products are mapped and displayed at the store */,
 		detailProduct: [] /* just the clicked product is mounted in the details page */,
@@ -229,7 +229,7 @@ class MyProvider extends Component {
 	}
 }
 
-MyProvider = createFragmentContainer(MyProvider, {
+ContextProvider = createFragmentContainer(ContextProvider, {
 	productsConnection: graphql`
 		fragment Context_productsConnection on ProductConnection {
 			edges {
@@ -249,4 +249,4 @@ MyProvider = createFragmentContainer(MyProvider, {
 	`,
 })
 
-export { MyProvider }
+export { ContextProvider }

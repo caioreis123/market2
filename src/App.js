@@ -1,7 +1,7 @@
 /* 
 1) index.js
-2) App.js
-3) Context.js
+2) Context.js
+3) App.js
 The App.js will define the 3 different pages of the app: home, details and store 
 */
 

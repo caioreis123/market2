@@ -38,6 +38,7 @@
         "babel-plugin-macros": "^2.6.0",
         "react-redux": "^7.1.0",
         "redux": "^4.0.4",
+        "redux-devtools": "^3.5.0",
         "relay-compiler": "^4.0.0"
     }
 }

@@ -4,6 +4,9 @@ import { Link } from "react-router-dom"
 import { MyConsumer } from "./../Context"
 import { withStyles, AppBar, Toolbar, Typography, IconButton, Badge } from "@material-ui/core"
 
+//redux imports:
+import { connect } from "react-redux"
+
 const styles = (theme) => ({
 	cart: {
 		marginLeft: "auto",
@@ -42,14 +45,14 @@ function Navbar(props) {
 									aria-label="Cart"
 								>
 									<Badge
-										badgeContent={value.totalInCart}
+										badgeContent={props.quantitiesInCart}
 										color="primary"
 										classes={{ badge: classes.badge }}
 									>
 										<i className="material-icons">local_grocery_store</i>
 									</Badge>
 									<Typography className={classes.cartValue} variant="h6" color="inherit">
-										${value.cartTotalValue}
+										${props.cartTotalPrice}
 									</Typography>
 								</IconButton>
 							</Toolbar>
@@ -65,4 +68,12 @@ Navbar.propTypes = {
 	classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(Navbar)
+const mapStateToProps = (state) => {
+	return {
+		cart: state.cart,
+		cartTotalPrice: state.cartTotalPrice,
+		quantitiesInCart: state.quantitiesInCart,
+	}
+}
+
+export default withStyles(styles)(connect(mapStateToProps)(Navbar))

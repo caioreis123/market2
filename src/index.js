@@ -1,7 +1,7 @@
 /* 
 1) index.js
-2) App.js
-3) Context.js
+2) Context.js
+3) App.js
 This is the top page in the hierarchy. Here we wrap the App component with the Router and Context API */
 import React from "react"
 import ReactDOM from "react-dom"
@@ -9,12 +9,12 @@ import "./index.css"
 import App from "./App"
 import * as serviceWorker from "./serviceWorker"
 import { BrowserRouter as Router } from "react-router-dom"
-import { MyProvider } from "./Context"
+import { ContextProvider } from "./Context"
 
 //redux import:
 import { createStore } from "redux"
-import { Provider } from "react-redux"
-import rootReducer from "./reducers/rootReducer"
+import { Provider as ReduxProvider } from "react-redux"
+import reducer from "./reducer"
 
 //relay imports:
 import graphql from "babel-plugin-relay/macro"
@@ -29,7 +29,7 @@ const srcQuery = graphql`
 	}
 `
 
-const Store = createStore(rootReducer)
+const Store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 ReactDOM.render(
 	<QueryRenderer
@@ -43,13 +43,13 @@ ReactDOM.render(
 				return <div>Loading...</div>
 			}
 			return (
-				<Provider store={Store} productsConnection={props.productsConnection}>
-					<MyProvider productsConnection={props.productsConnection}>
+				<ReduxProvider store={Store} productsConnection={props.productsConnection}>
+					<ContextProvider productsConnection={props.productsConnection}>
 						<Router>
 							<App />
 						</Router>
-					</MyProvider>
-				</Provider>
+					</ContextProvider>
+				</ReduxProvider>
 			)
 		}}
 	/>,

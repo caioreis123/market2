@@ -5,6 +5,10 @@ import PropTypes from "prop-types"
 import { withWidth, IconButton, GridListTileBar, GridListTile, GridList, withStyles } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { MyConsumer } from "./../Context"
+import { addProductToCart } from "../actionsAndConstants"
+
+//redux imports:
+import { connect } from "react-redux"
 
 const styles = (theme) => ({
 	root: {
@@ -56,7 +60,7 @@ const SimpleProductList = (props) => {
 											<IconButton
 												disabled={tile.count === tile.stock ? true : false}
 												onClick={() => {
-													value.addToCart(tile.id)
+													props.dispatch(addProductToCart(tile))
 												}}
 												className={classes.icon}
 											>
@@ -81,5 +85,5 @@ SimpleProductList.propTypes = {
 const SimpleProductListWithStyles = withStyles(styles)(SimpleProductList)
 const SimpleProductListWithStylesWithWidth = withWidth()(SimpleProductListWithStyles)
 const ProductList = SimpleProductListWithStylesWithWidth
-
-export default ProductList
+//export default ProductList
+export default connect()(ProductList)

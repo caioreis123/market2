@@ -5,6 +5,8 @@ import PropTypes from "prop-types"
 import { withStyles, Card, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core"
 import compose from "recompose/compose"
 
+import { connect } from "react-redux"
+
 const styles = (theme) => ({
 	card: {
 		display: "flex",
@@ -45,7 +47,7 @@ const styles = (theme) => ({
 function CartItem(props) {
 	const { classes } = props
 	const { id, title, img, price, count, company, stock } = props.individualProduct
-	const { increment, decrement, removeItem } = props.value
+	//const { increment, decrement, removeItem } = props.value
 
 	return (
 		<React.Fragment>
@@ -69,7 +71,7 @@ function CartItem(props) {
 							<Typography variant="subtitle1">Quantity:</Typography>
 							<IconButton
 								onClick={() => {
-									decrement(id)
+									//decrement(id)
 								}}
 								aria-label="Decrement"
 								disabled={count === 1 ? true : false}
@@ -77,12 +79,12 @@ function CartItem(props) {
 								<i class="material-icons">remove_circle_outline</i>
 							</IconButton>
 
-							{count}
+							{props.cartTotalValue}
 
 							<IconButton
 								disabled={count === stock ? true : false}
 								onClick={() => {
-									increment(id)
+									//increment(id)
 								}}
 								aria-label="Increment"
 							>
@@ -93,7 +95,7 @@ function CartItem(props) {
 						Remove Item
 						<IconButton
 							onClick={() => {
-								removeItem(id)
+								//removeItem(id)
 							}}
 							aria-label="Remove"
 						>
@@ -111,9 +113,16 @@ CartItem.propTypes = {
 	theme: PropTypes.object.isRequired,
 }
 
-export default compose(
-	withStyles(styles, {
-		withTheme: true,
-		name: "CartItem",
-	}),
-)(CartItem)
+// const mapStateToProps = (state) => {
+// 	return {
+// 		cart: state.cart,
+// 		cartTotalValue: state.cartTotalValue,
+// 		totalInCart: state.totalInCart,
+// 	}
+// }
+
+export default withStyles(styles)(CartItem)
+
+//export default connect(mapStateToProps)(withStyles(styles)(CartItem))
+
+//export default withStyles(styles)(connect(mapStateToProps)(CartItem))

@@ -2,16 +2,25 @@
 import React from "react"
 import CartItem from "./CartItem"
 
-function CartList({ value }) {
-	const { cart } = value
+//redux imports:
+import { connect } from "react-redux"
 
+function CartList(props) {
 	return (
 		<div>
-			{cart.map((individualProduct) => {
-				return <CartItem key={individualProduct.id} individualProduct={individualProduct} value={value} />
+			{props.cart.map((individualProduct) => {
+				return <CartItem key={individualProduct.id} individualProduct={individualProduct} />
 			})}
 		</div>
 	)
 }
 
-export default CartList
+const mapStateToProps = (state) => {
+	return {
+		cart: state.cart,
+		cartTotalPrice: state.cartTotalPrice,
+		quantitiesInCart: state.quantitiesInCart,
+	}
+}
+
+export default connect(mapStateToProps)(CartList)
