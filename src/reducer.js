@@ -11,6 +11,7 @@ const reducer = (state = initialState, action) => {
 	let newCartTotalPrice
 	let newQuantitiesInCart
 	let product
+	let itemIndex
 
 	switch (action.type) {
 		case ADD_PRODUCT_TO_CART:
@@ -31,13 +32,44 @@ const reducer = (state = initialState, action) => {
 			}
 
 		case DECREMENT_CART_ITEM_QUANTITY:
-			return updatedCart
+			updatedCart = [ ...state.cart ]
+			itemIndex = updatedCart.indexOf(action.payload)
+			const decrementedItem = {
+				...updatedCart[itemIndex],
+			}
+			decrementedItem.count--
+			updatedCart[itemIndex] = decrementedItem
+
+			newQuantitiesInCart = state.quantitiesInCart - 1
+
+			newCartTotalPrice = state.cartTotalPrice - decrementedItem.price
+
+			return {
+				...state,
+				cart: updatedCart,
+				cartTotalPrice: newCartTotalPrice,
+				quantitiesInCart: newQuantitiesInCart,
+			}
 
 		case INCREMENT_CART_ITEM_QUANTITY:
-			updatedCart = [ ...state.cart, product ]
-			product = updatedCart[action.payload - 1]
-			product.count = product.count + 1
-			return { ...state, cart: updatedCart }
+			updatedCart = [ ...state.cart ]
+			itemIndex = updatedCart.indexOf(action.payload)
+			const incrementedItem = {
+				...updatedCart[itemIndex],
+			}
+			incrementedItem.count++
+			updatedCart[itemIndex] = incrementedItem
+
+			newQuantitiesInCart = state.quantitiesInCart + 1
+
+			newCartTotalPrice = state.cartTotalPrice + incrementedItem.price
+
+			return {
+				...state,
+				cart: updatedCart,
+				cartTotalPrice: newCartTotalPrice,
+				quantitiesInCart: newQuantitiesInCart,
+			}
 		default:
 			return state
 	}

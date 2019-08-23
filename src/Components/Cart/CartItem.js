@@ -1,13 +1,11 @@
 /* This component apears inside the cart. Each product added is a card with some buttons
 a picture, a subtotal display. */
 import React from "react"
-import PropTypes from "prop-types"
 import { withStyles, Card, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core"
-import compose from "recompose/compose"
 
 //redux imports:
 import { connect } from "react-redux"
-import { incrementCartItemQuantity } from "../../actionsAndConstants"
+import { incrementCartItemQuantity, decrementCartItemQuantity } from "../../actionsAndConstants"
 
 const styles = (theme) => ({
 	card: {
@@ -73,12 +71,13 @@ function CartItem(props) {
 							<Typography variant="subtitle1">Quantity:</Typography>
 							<IconButton
 								onClick={() => {
+									props.dispatch(decrementCartItemQuantity(props.individualProduct))
 									//decrement(id)
 								}}
 								aria-label="Decrement"
 								disabled={count === 1 ? true : false}
 							>
-								<i class="material-icons">remove_circle_outline</i>
+								<i className="material-icons">remove_circle_outline</i>
 							</IconButton>
 
 							{count}
@@ -86,12 +85,12 @@ function CartItem(props) {
 							<IconButton
 								disabled={count === stock ? true : false}
 								onClick={() => {
-									props.dispatch(incrementCartItemQuantity(id))
+									props.dispatch(incrementCartItemQuantity(props.individualProduct))
 									//increment(id)
 								}}
 								aria-label="Increment"
 							>
-								<i class="material-icons">add_circle_outline</i>
+								<i className="material-icons">add_circle_outline</i>
 							</IconButton>
 						</div>
 						<Typography variant="subtitle1">Subtotal: ${count * price}</Typography>
@@ -102,18 +101,13 @@ function CartItem(props) {
 							}}
 							aria-label="Remove"
 						>
-							<i class="material-icons">delete</i>
+							<i className="material-icons">delete</i>
 						</IconButton>
 					</CardContent>
 				</div>
 			</Card>
 		</React.Fragment>
 	)
-}
-
-CartItem.propTypes = {
-	classes: PropTypes.object.isRequired,
-	theme: PropTypes.object.isRequired,
 }
 
 // const mapStateToProps = (state) => {

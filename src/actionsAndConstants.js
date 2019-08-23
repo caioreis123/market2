@@ -10,16 +10,16 @@ export function addProductToCart(product) {
 }
 
 export const INCREMENT_CART_ITEM_QUANTITY = "INCREMENT_CART_ITEM_QUANTITY"
-export function incrementCartItemQuantity(id) {
+export function incrementCartItemQuantity(product) {
 	return {
 		type: INCREMENT_CART_ITEM_QUANTITY,
-		payload: id,
+		payload: product,
 	}
 }
 export const DECREMENT_CART_ITEM_QUANTITY = "DECREMENT_CART_ITEM_QUANTITY"
-export function decrementCartItemQuantity(id) {
+export function decrementCartItemQuantity(product) {
 	return {
 		type: DECREMENT_CART_ITEM_QUANTITY,
-		payload: id,
+		payload: product,
 	}
 }

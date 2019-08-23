@@ -64,7 +64,7 @@ const SimpleProductList = (props) => {
 												}}
 												className={classes.icon}
 											>
-												<i class="material-icons">add_shopping_cart</i>
+												<i className="material-icons">add_shopping_cart</i>
 											</IconButton>
 										}
 									/>

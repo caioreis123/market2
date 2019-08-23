@@ -9,7 +9,6 @@ function CartList(props) {
 	return (
 		<div>
 			{props.cart.map((individualProduct) => {
-				console.log(individualProduct.id)
 				return <CartItem key={individualProduct.id} individualProduct={individualProduct} />
 			})}
 		</div>
