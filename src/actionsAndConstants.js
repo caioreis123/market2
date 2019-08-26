@@ -2,10 +2,13 @@
 //and our constants(capitalized_underscore). Exporting every thing.
 
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART"
-export function addProductToCart(product) {
+export function addProductToCart(product, allProducts) {
 	return {
 		type: ADD_PRODUCT_TO_CART,
-		payload: product,
+		payload: {
+			product,
+			allProducts,
+		},
 	}
 }
 
@@ -32,8 +35,9 @@ export function decrementCartItemQuantity(product) {
 	}
 }
 export const CLEAR_CART = "CLEAR_CART"
-export function clearCart() {
+export function clearCart(updatedProducts) {
 	return {
 		type: CLEAR_CART,
+		payload: updatedProducts,
 	}
 }

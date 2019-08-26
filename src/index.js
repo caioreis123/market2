@@ -9,7 +9,7 @@ import "./index.css"
 import App from "./App"
 import * as serviceWorker from "./serviceWorker"
 import { BrowserRouter as Router } from "react-router-dom"
-import { ContextProvider } from "./Context"
+import ContextProvider from "./Context"
 
 //redux import:
 import { createStore } from "redux"
@@ -43,7 +43,7 @@ ReactDOM.render(
 				return <div>Loading...</div>
 			}
 			return (
-				<ReduxProvider store={Store} productsConnection={props.productsConnection}>
+				<ReduxProvider store={Store}>
 					<ContextProvider productsConnection={props.productsConnection}>
 						<Router>
 							<App />

@@ -42,7 +42,7 @@ const SimpleProductList = (props) => {
 				return (
 					<div className={classes.root}>
 						<GridList rows={2} cols={responsiveCols()} cellHeight={250}>
-							{value.products.map((tile) => (
+							{props.allProducts.map((tile) => (
 								<GridListTile key={tile.id}>
 									<Link to={`/details/${tile.id}`}>
 										<img
@@ -50,7 +50,10 @@ const SimpleProductList = (props) => {
 											alt={tile.title}
 											width="250"
 											height="250"
-											onClick={() => value.handleDetail(tile)}
+											onClick={() => {
+												//props.dispatch(setDetail(tile))
+												//value.handleDetail(tile)
+											}}
 										/>
 									</Link>
 									<GridListTileBar
@@ -60,7 +63,7 @@ const SimpleProductList = (props) => {
 											<IconButton
 												disabled={tile.count === tile.stock ? true : false}
 												onClick={() => {
-													props.dispatch(addProductToCart(tile))
+													props.dispatch(addProductToCart(tile, props.allProducts))
 												}}
 												className={classes.icon}
 											>
@@ -82,8 +85,13 @@ SimpleProductList.propTypes = {
 	classes: PropTypes.object.isRequired,
 }
 
+const mapStateToProps = (state) => {
+	return {
+		allProducts: state.allProducts,
+	}
+}
+
 const SimpleProductListWithStyles = withStyles(styles)(SimpleProductList)
 const SimpleProductListWithStylesWithWidth = withWidth()(SimpleProductListWithStyles)
 const ProductList = SimpleProductListWithStylesWithWidth
-//export default ProductList
-export default connect()(ProductList)
+export default connect(mapStateToProps)(ProductList)

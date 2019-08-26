@@ -3,7 +3,6 @@ import { Typography, Grid, Button, withStyles } from "@material-ui/core"
 
 //redux imports:
 import { connect } from "react-redux"
-import { clearCart } from "../../actionsAndConstants"
 
 const styles = (theme) => ({
 	root: {
@@ -29,7 +28,7 @@ function CartTotal(props) {
 			<Button
 				className={classes.buttonClear}
 				onClick={() => {
-					props.dispatch(clearCart())
+					props.value.deepCopyProducts()
 				}}
 				variant="contained"
 				color="secondary"

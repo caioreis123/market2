@@ -7,6 +7,8 @@ import {
 } from "./actionsAndConstants"
 
 const initialState = {
+	allProducts: [],
+	detailProduct: {},
 	cart: [],
 	cartTotalPrice: 0,
 	quantitiesInCart: 0,
@@ -14,26 +16,33 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 	let updatedCart
+	let updatedAllProducts
 	let newCartTotalPrice
 	let newQuantitiesInCart
 	let product
 	let itemIndex
-	let cart
 
 	switch (action.type) {
 		case ADD_PRODUCT_TO_CART:
-			product = action.payload
+			product = action.payload.product
 			product.count = product.count + 1
-			updatedCart = [ ...state.cart, product ]
-			updatedCart = [ ...new Set(updatedCart) ]
 			product.total = product.count * product.price
 
-			newQuantitiesInCart = state.quantitiesInCart + 1
+			updatedCart = [ ...state.cart, product ]
+			updatedCart = [ ...new Set(updatedCart) ]
 
+			newQuantitiesInCart = state.quantitiesInCart + 1
 			newCartTotalPrice = state.cartTotalPrice + product.price
+
+			if (action.payload.allProducts) {
+				updatedAllProducts = [ ...action.payload.allProducts ]
+				itemIndex = updatedAllProducts.indexOf(product)
+				updatedAllProducts[itemIndex] = product
+			} else updatedAllProducts = state.allProducts
 
 			return {
 				...state,
+				allProducts: updatedAllProducts,
 				cart: updatedCart,
 				cartTotalPrice: newCartTotalPrice,
 				quantitiesInCart: newQuantitiesInCart,
@@ -53,11 +62,17 @@ const reducer = (state = initialState, action) => {
 
 			newCartTotalPrice = state.cartTotalPrice - decrementedItem.price
 
+			updatedAllProducts = [ ...state.allProducts ]
+			let index = updatedAllProducts.indexOf(action.payload)
+			updatedAllProducts[index] = decrementedItem
+			//this last update is necessary so the productList has the right amount of each product
+
 			return {
 				...state,
 				cart: updatedCart,
 				cartTotalPrice: newCartTotalPrice,
 				quantitiesInCart: newQuantitiesInCart,
+				allProducts: updatedAllProducts,
 			}
 
 		case INCREMENT_CART_ITEM_QUANTITY:
@@ -103,11 +118,13 @@ const reducer = (state = initialState, action) => {
 			}
 
 		case CLEAR_CART:
+			let updatedList = action.payload
 			updatedCart = []
 			newCartTotalPrice = 0
 			newQuantitiesInCart = 0
 			return {
 				...state,
+				allProducts: updatedList,
 				cart: updatedCart,
 				cartTotalPrice: newCartTotalPrice,
 				quantitiesInCart: newQuantitiesInCart,
