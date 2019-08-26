@@ -23,10 +23,6 @@ const statelessContextProvider = (props) => {
 	useEffect(() => {
 		deepCopyProducts()
 	}, [])
-	// componentDidMount() {
-	// 	deepCopyProducts()
-	// 	//the deep copy should run as soon as possible so we can get the original data
-	// }
 
 	function deepCopyProducts() {
 		let copiedProductsFromDB = []
