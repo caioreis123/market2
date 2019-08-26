@@ -1,10 +1,8 @@
 /* this is the Store main page. Where all the products are displayed */
 
 import React from "react"
-import PropTypes from "prop-types"
 import { withWidth, IconButton, GridListTileBar, GridListTile, GridList, withStyles } from "@material-ui/core"
 import { Link } from "react-router-dom"
-import { MyConsumer } from "./../Context"
 
 //redux imports:
 import { connect } from "react-redux"
@@ -37,52 +35,33 @@ const SimpleProductList = (props) => {
 	}
 
 	return (
-		<MyConsumer>
-			{(value) => {
-				return (
-					<div className={classes.root}>
-						<GridList rows={2} cols={responsiveCols()} cellHeight={250}>
-							{props.allProducts.map((tile) => (
-								<GridListTile key={tile.id}>
-									<Link to={`/details/${tile.id}`}>
-										<img
-											src={tile.img}
-											alt={tile.title}
-											width="250"
-											height="250"
-											onClick={() => {
-												//props.dispatch(setDetail(tile))
-												//value.handleDetail(tile)
-											}}
-										/>
-									</Link>
-									<GridListTileBar
-										title={tile.title}
-										subtitle={<span>$: {tile.price}</span>}
-										actionIcon={
-											<IconButton
-												disabled={tile.count === tile.stock ? true : false}
-												onClick={() => {
-													props.dispatch(addProductToCart(tile, props.allProducts))
-												}}
-												className={classes.icon}
-											>
-												<i className="material-icons">add_shopping_cart</i>
-											</IconButton>
-										}
-									/>
-								</GridListTile>
-							))}
-						</GridList>
-					</div>
-				)
-			}}
-		</MyConsumer>
+		<div className={classes.root}>
+			<GridList rows={2} cols={responsiveCols()} cellHeight={250}>
+				{props.allProducts.map((tile) => (
+					<GridListTile key={tile.id}>
+						<Link to={`/details/${tile.id}`}>
+							<img src={tile.img} alt={tile.title} width="250" height="250" />
+						</Link>
+						<GridListTileBar
+							title={tile.title}
+							subtitle={<span>$: {tile.price}</span>}
+							actionIcon={
+								<IconButton
+									disabled={tile.count === tile.stock ? true : false}
+									onClick={() => {
+										props.dispatch(addProductToCart(tile, props.allProducts))
+									}}
+									className={classes.icon}
+								>
+									<i className="material-icons">add_shopping_cart</i>
+								</IconButton>
+							}
+						/>
+					</GridListTile>
+				))}
+			</GridList>
+		</div>
 	)
-}
-
-SimpleProductList.propTypes = {
-	classes: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => {

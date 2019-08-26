@@ -8,7 +8,6 @@ import {
 
 const initialState = {
 	allProducts: [],
-	detailProduct: {},
 	cart: [],
 	cartTotalPrice: 0,
 	quantitiesInCart: 0,
@@ -91,7 +90,7 @@ const reducer = (state = initialState, action) => {
 			newCartTotalPrice = state.cartTotalPrice + incrementedItem.price
 
 			updatedAllProducts = [ ...state.allProducts ]
-			index = updatedAllProducts.indexOf(incrementedItem)
+			index = updatedAllProducts.indexOf(action.payload)
 			updatedAllProducts[index] = incrementedItem
 
 			return {
