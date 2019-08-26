@@ -1,5 +1,5 @@
-//in here we are going to write all our action creators functions (camelCase)
-//and our constants(capitalized_underscore). Exporting every thing.
+//action creators functions are camelCase, while constants are capitalized_underscore
+// exporting every thing
 
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART"
 export function addProductToCart(product, allProducts) {

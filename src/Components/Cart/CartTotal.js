@@ -1,5 +1,6 @@
 import React from "react"
 import { Typography, Grid, Button, withStyles } from "@material-ui/core"
+import { Link } from "react-router-dom"
 
 //redux imports:
 import { connect } from "react-redux"
@@ -35,16 +36,18 @@ function CartTotal(props) {
 			>
 				Clear Cart
 			</Button>
-			<Button
-				onClick={() => {
-					props.value.buyMutation()
-				}}
-				className={classes.buttonBuy}
-				color="primary"
-				variant="contained"
-			>
-				Buy it now
-			</Button>
+			<Link to={"/"} style={{ textDecoration: "none" }}>
+				<Button
+					onClick={() => {
+						props.value.buyMutation()
+					}}
+					className={classes.buttonBuy}
+					color="primary"
+					variant="contained"
+				>
+					Buy it now
+				</Button>
+			</Link>
 		</Grid>
 	)
 }

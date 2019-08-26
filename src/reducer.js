@@ -90,9 +90,14 @@ const reducer = (state = initialState, action) => {
 
 			newCartTotalPrice = state.cartTotalPrice + incrementedItem.price
 
+			updatedAllProducts = [ ...state.allProducts ]
+			index = updatedAllProducts.indexOf(incrementedItem)
+			updatedAllProducts[index] = incrementedItem
+
 			return {
 				...state,
 				cart: updatedCart,
+				allProducts: updatedAllProducts,
 				cartTotalPrice: newCartTotalPrice,
 				quantitiesInCart: newQuantitiesInCart,
 			}
@@ -110,9 +115,15 @@ const reducer = (state = initialState, action) => {
 			product.total = 0
 			product.count = 0
 
+			updatedAllProducts = [ ...state.allProducts ]
+			index = updatedAllProducts.indexOf(action.payload)
+			updatedAllProducts[index] = product
+			//add this updatedProduct back to allProducts so we can update this state
+
 			return {
 				...state,
 				cart: updatedCart,
+				allProducts: updatedAllProducts,
 				cartTotalPrice: newCartTotalPrice,
 				quantitiesInCart: newQuantitiesInCart,
 			}
