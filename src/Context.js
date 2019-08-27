@@ -40,7 +40,7 @@ const statelessContextProvider = (props) => {
 	//The deepCopyProducts also does the reset in the cart and cartTotalValue states
 
 	const buyMutation = () => {
-		props.cart.map((object) => {
+		props.cart.forEach((object) => {
 			const cartItemId = object.id
 			const cartItemNewStock = object.stock - object.count
 			let mutation = graphql`
@@ -62,7 +62,7 @@ const statelessContextProvider = (props) => {
 				variables,
 				onCompleted: (response, errors) => {
 					alert(
-						"Great!! We received your request in our database. Unfortunately this experience only emulates the purchase. Thank you for interacting with this web app.",
+						"Great!! We received your request in our database. Unfortunately, this experience only emulates the purchase. Thank you for interacting with this web app.",
 					)
 					window.location.reload()
 				},
