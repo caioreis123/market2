@@ -24,11 +24,15 @@ const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_PRODUCT_TO_CART:
 			product = action.payload.product
+			//get it
+
 			product.count = product.count + 1
 			product.total = product.count * product.price
+			//change it
 
 			updatedCart = [ ...state.cart, product ]
 			updatedCart = [ ...new Set(updatedCart) ]
+			//put it in cart
 
 			newQuantitiesInCart = state.quantitiesInCart + 1
 			newCartTotalPrice = state.cartTotalPrice + product.price
@@ -38,6 +42,7 @@ const reducer = (state = initialState, action) => {
 				itemIndex = updatedAllProducts.indexOf(product)
 				updatedAllProducts[itemIndex] = product
 			} else updatedAllProducts = state.allProducts
+			//put it in allProducts if added to cart in the ProductList component. This is important to update the stock locally
 
 			return {
 				...state,
@@ -53,9 +58,14 @@ const reducer = (state = initialState, action) => {
 			const decrementedItem = {
 				...updatedCart[itemIndex],
 			}
+			//get it
+
 			decrementedItem.count--
 			decrementedItem.total = decrementedItem.count * decrementedItem.price
+			//change it
+
 			updatedCart[itemIndex] = decrementedItem
+			//put it in the cart
 
 			newQuantitiesInCart = state.quantitiesInCart - 1
 
@@ -63,7 +73,10 @@ const reducer = (state = initialState, action) => {
 
 			updatedAllProducts = [ ...state.allProducts ]
 			let index = updatedAllProducts.indexOf(action.payload)
+			//get it
+
 			updatedAllProducts[index] = decrementedItem
+			//put it in the allProducts
 			//this last update is necessary so the productList has the right amount of each product
 
 			return {
