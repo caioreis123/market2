@@ -24,6 +24,7 @@ const styles = (theme) => ({
 		[theme.breakpoints.down("xs")]: {
 			paddingTop: "0px !important",
 			borderBottom: " 2px solid #ccc",
+			marginBottom: theme.spacing.unit * 5,
 		},
 	},
 	detailsQuantity: {
