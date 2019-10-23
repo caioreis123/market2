@@ -15,7 +15,7 @@ function Cart(props) {
 					return (
 						<React.Fragment>
 							<h1 style={{ textAlign: "center" }}>YOUR CART</h1>
-							<CartList value={value} />
+							<CartList />
 							<CartTotal value={value} />
 						</React.Fragment>
 					)
